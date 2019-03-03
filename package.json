@@ -21,7 +21,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run dist && git add ."
+      "pre-push": "npm run dist && git add . && git commit -m  \"Run build dist\""
     }
   },
   "repository": "aframevr/aframe-inspector",
