@@ -6,8 +6,21 @@ jobs:
       - image: circleci/node:10.15-jessie-browsers
     steps:
       - checkout
+
       - run:
-          name: Firebase script
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run firebase script
           command: node .circleci/firebase-script.js 
 workflows:
   version: 2
