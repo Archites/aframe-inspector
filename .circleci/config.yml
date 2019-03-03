@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  upload:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:10.15-jessie-browsers
+    steps:
+      - checkout
+      - run:
+          name: Firebase script
+          command: node .circleci/firebase-script.js 
+workflows:
+  version: 2
+  upload:
+    jobs:
+      - upload:
+          filters:
+            branches:
+              only: master
