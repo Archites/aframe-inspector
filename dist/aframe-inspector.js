@@ -22618,7 +22618,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       this.add(this.pickers);
       this.add(this.planes);
 
-      //// PLANES
+      // // PLANES
 
       var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 2, 2);
       var planeMaterial = new THREE.MeshBasicMaterial({
@@ -22644,7 +22644,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
         this.planes[i] = planes[i];
       }
 
-      //// HANDLES AND PICKERS
+      // // HANDLES AND PICKERS
 
       var setupGizmos = function setupGizmos(gizmoMap, parent) {
         for (var name in gizmoMap) {
@@ -22733,33 +22733,115 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
     this.handleGizmos = {
       X: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0xff0000 })), [0.5, 0, 0], [0, 0, -Math.PI / 2]], [new THREE.Line(lineXGeometry, new GizmoLineMaterial({ color: 0xff0000 }))]],
 
-      Y: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })), [0, 0.5, 0]], [new THREE.Line(lineYGeometry, new GizmoLineMaterial({ color: 0x00ff00 }))]],
+      // Y: [
+      //   [
+      //     new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })),
+      //     [0, 0.5, 0]
+      //   ],
+      //   [
+      //     new THREE.Line(
+      //       lineYGeometry,
+      //       new GizmoLineMaterial({ color: 0x00ff00 })
+      //     )
+      //   ]
+      // ],
 
-      Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]],
+      Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]]
 
-      XYZ: [[new THREE.Mesh(new THREE.OctahedronGeometry(0.1, 0), new GizmoMaterial({ color: 0xffffff, opacity: 0.25 })), [0, 0, 0], [0, 0, 0]]],
+      // XYZ: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.OctahedronGeometry(0.1, 0),
+      //       new GizmoMaterial({ color: 0xffffff, opacity: 0.25 })
+      //     ),
+      //     [0, 0, 0],
+      //     [0, 0, 0]
+      //   ]
+      // ],
 
-      XY: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0xffff00, opacity: 0.25 })), [0.15, 0.15, 0]]],
+      // XY: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.PlaneBufferGeometry(0.29, 0.29),
+      //       new GizmoMaterial({ color: 0xffff00, opacity: 0.25 })
+      //     ),
+      //     [0.15, 0.15, 0]
+      //   ]
+      // ],
 
-      YZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0x00ffff, opacity: 0.25 })), [0, 0.15, 0.15], [0, Math.PI / 2, 0]]],
+      // YZ: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.PlaneBufferGeometry(0.29, 0.29),
+      //       new GizmoMaterial({ color: 0x00ffff, opacity: 0.25 })
+      //     ),
+      //     [0, 0.15, 0.15],
+      //     [0, Math.PI / 2, 0]
+      //   ]
+      // ],
 
-      XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })), [0.15, 0, 0.15], [-Math.PI / 2, 0, 0]]]
+      // XZ: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.PlaneBufferGeometry(0.29, 0.29),
+      //       new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })
+      //     ),
+      //     [0.15, 0, 0.15],
+      //     [-Math.PI / 2, 0, 0]
+      //   ]
+      // ]
     };
 
     this.pickerGizmos = {
       X: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0.6, 0, 0], [0, 0, -Math.PI / 2]]],
 
-      Y: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0.6, 0]]],
+      // Y: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false),
+      //       pickerMaterial
+      //     ),
+      //     [0, 0.6, 0]
+      //   ]
+      // ],
 
-      Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
+      Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]]
 
-      XYZ: [[new THREE.Mesh(new THREE.OctahedronGeometry(0.2, 0), pickerMaterial)]],
+      // XYZ: [
+      //   [new THREE.Mesh(new THREE.OctahedronGeometry(0.2, 0), pickerMaterial)]
+      // ],
 
-      XY: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), pickerMaterial), [0.2, 0.2, 0]]],
+      // XY: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.PlaneBufferGeometry(0.4, 0.4),
+      //       pickerMaterial
+      //     ),
+      //     [0.2, 0.2, 0]
+      //   ]
+      // ],
 
-      YZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), pickerMaterial), [0, 0.2, 0.2], [0, Math.PI / 2, 0]]],
+      // YZ: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.PlaneBufferGeometry(0.4, 0.4),
+      //       pickerMaterial
+      //     ),
+      //     [0, 0.2, 0.2],
+      //     [0, Math.PI / 2, 0]
+      //   ]
+      // ],
 
-      XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), pickerMaterial), [0.2, 0, 0.2], [-Math.PI / 2, 0, 0]]]
+      // XZ: [
+      //   [
+      //     new THREE.Mesh(
+      //       new THREE.PlaneBufferGeometry(0.4, 0.4),
+      //       pickerMaterial
+      //     ),
+      //     [0.2, 0, 0.2],
+      //     [-Math.PI / 2, 0, 0]
+      //   ]
+      // ]
     };
 
     this.setActivePlane = function (axis, eye) {
@@ -23261,6 +23343,44 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
           if (scope.axis.search('X') === -1) point.x = 0;
           if (scope.axis.search('Y') === -1) point.y = 0;
           if (scope.axis.search('Z') === -1) point.z = 0;
+
+          if (point.x > 0) {
+            point.x = Math.round(point.x * 2) / 2;
+            var tempCal = point.x % 0.5;
+            if (tempCal > 0) {
+              point.x += 0.5;
+            }
+          } else if (point.x < 0) {
+            point.x = Math.round(point.x * 2) / 2;
+            var _tempCal = point.x % 0.5;
+            if (_tempCal > 0) {
+              point.x -= 0.5;
+            }
+          } else if (point.y > 0) {
+            point.y = Math.round(point.y * 2) / 2;
+            var _tempCal2 = point.y % 0.5;
+            if (_tempCal2 > 0) {
+              point.y += 0.5;
+            }
+          } else if (point.y < 0) {
+            point.y = Math.round(point.y * 2) / 2;
+            var _tempCal3 = point.y % 0.5;
+            if (_tempCal3 > 0) {
+              point.y -= 0.5;
+            }
+          } else if (point.z > 0) {
+            point.z = Math.round(point.z * 2) / 2;
+            var _tempCal4 = point.z % 0.5;
+            if (_tempCal4 > 0) {
+              point.z += 0.5;
+            }
+          } else if (point.z < 0) {
+            point.z = Math.round(point.z * 2) / 2;
+            var _tempCal5 = point.z % 0.5;
+            if (_tempCal5 > 0) {
+              point.z -= 0.5;
+            }
+          }
 
           point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
