@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { printEntity, removeEntity, cloneEntity } from '../../lib/entity';
+// import { printEntity, removeEntity, cloneEntity } from '../../lib/entity';
+import { printEntity, removeEntity } from '../../lib/entity';
 
 const Events = require('../../lib/Events.js');
 
@@ -16,7 +17,7 @@ export default class Entity extends React.Component {
     toggleExpandedCollapsed: PropTypes.func
   };
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {};
   }
@@ -34,21 +35,21 @@ export default class Entity extends React.Component {
     entity.setAttribute('visible', !visible);
   };
 
-  render() {
+  render () {
     const isFiltering = this.props.isFiltering;
     const isExpanded = this.props.isExpanded;
     const entity = this.props.entity;
     const tagName = entity.tagName.toLowerCase();
 
     // Clone and remove buttons if not a-scene.
-    const cloneButton =
-      tagName === 'a-scene' ? null : (
-        <a
-          onClick={() => cloneEntity(entity)}
-          title="Clone entity"
-          className="button fa fa-clone"
-        />
-      );
+    // const cloneButton =
+    //   tagName === 'a-scene' ? null : (
+    //     <a
+    //       onClick={() => cloneEntity(entity)}
+    //       title="Clone entity"
+    //       className="button fa fa-clone"
+    //     />
+    //   );
     const removeButton =
       tagName === 'a-scene' ? null : (
         <a
@@ -62,7 +63,7 @@ export default class Entity extends React.Component {
       );
 
     // Add spaces depending on depth.
-    const pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
+    // const pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
     let collapse;
     if (entity.children.length > 0 && !isFiltering) {
       collapse = (
@@ -82,13 +83,13 @@ export default class Entity extends React.Component {
       tagName === 'a-scene'
         ? entity.object3D.visible
         : entity.getAttribute('visible');
-    const visibilityButton = (
-      <i
-        title="Toggle entity visibility"
-        className={'fa ' + (visible ? 'fa-eye' : 'fa-eye-slash')}
-        onClick={this.toggleVisibility}
-      />
-    );
+    // const visibilityButton = (
+    //   <i
+    //     title="Toggle entity visibility"
+    //     className={'fa ' + (visible ? 'fa-eye' : 'fa-eye-slash')}
+    //     onClick={this.toggleVisibility}
+    //   />
+    // );
 
     // Class name.
     const className = classnames({
@@ -101,16 +102,16 @@ export default class Entity extends React.Component {
     return (
       <div className={className} onClick={this.onClick}>
         <span>
-          {visibilityButton}
+          {/* {visibilityButton} */}
           <span
             className="entityChildPadding"
-            dangerouslySetInnerHTML={{ __html: pad }}
+            // dangerouslySetInnerHTML={{ __html: pad }}
           />
           {collapse}
           {printEntity(entity, this.onDoubleClick)}
         </span>
         <span className="entityActions">
-          {cloneButton}
+          {/* {cloneButton} */}
           {removeButton}
         </span>
       </div>

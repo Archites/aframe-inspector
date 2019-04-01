@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 import React from 'react';
 import Events from '../../lib/Events.js';
-import { saveBlob, saveString } from '../../lib/utils';
+// import { saveBlob, saveString } from '../../lib/utils';
+import { saveBlob } from '../../lib/utils';
 
-const LOCALSTORAGE_MOCAP_UI = 'aframeinspectormocapuienabled';
+// const LOCALSTORAGE_MOCAP_UI = 'aframeinspectormocapuienabled';
 
-function filterHelpers(scene, visible) {
+function filterHelpers (scene, visible) {
   scene.traverse(o => {
     if (o.userData.source === 'INSPECTOR') {
       o.visible = visible;
@@ -13,7 +14,7 @@ function filterHelpers(scene, visible) {
   });
 }
 
-function getSceneName(scene) {
+function getSceneName (scene) {
   return scene.id || slugify(window.location.host + window.location.pathname);
 }
 
@@ -22,7 +23,7 @@ function getSceneName(scene) {
  * @param  {string} text String to slugify
  * @return {string}      Slugified string
  */
-function slugify(text) {
+function slugify (text) {
   return text
     .toString()
     .toLowerCase()
@@ -37,7 +38,7 @@ function slugify(text) {
  * Tools and actions.
  */
 export default class Toolbar extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -45,14 +46,14 @@ export default class Toolbar extends React.Component {
     };
   }
 
-  exportSceneToGLTF() {
+  exportSceneToGLTF () {
     ga('send', 'event', 'SceneGraph', 'exportGLTF');
     const sceneName = getSceneName(AFRAME.scenes[0]);
     const scene = AFRAME.scenes[0].object3D;
     filterHelpers(scene, false);
     AFRAME.INSPECTOR.exporters.gltf.parse(
       scene,
-      function(buffer) {
+      function (buffer) {
         filterHelpers(scene, true);
         const blob = new Blob([buffer], { type: 'application/octet-stream' });
         saveBlob(blob, sceneName + '.glb');
@@ -61,7 +62,7 @@ export default class Toolbar extends React.Component {
     );
   }
 
-  addEntity() {
+  addEntity () {
     Events.emit('entitycreate', { element: 'a-entity', components: {} });
   }
 
@@ -91,7 +92,7 @@ export default class Toolbar extends React.Component {
     this.setState({isPlaying: true});
   }
 
-  render() {
+  render () {
     const watcherClassNames = classnames({
       button: true,
       fa: true,
