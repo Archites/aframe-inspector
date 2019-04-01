@@ -1800,9 +1800,9 @@ function getComponentClipboardRepresentation(entity, componentName) {
   return componentName + '="' + attributes + '"';
 }
 
-function isEmpty(string) {
-  return string === null || string === '';
-}
+// function isEmpty(string) {
+//   return string === null || string === '';
+// }
 
 /**
  * Entity representation.
@@ -1818,6 +1818,8 @@ function printEntity(entity, onDoubleClick) {
     return '';
   }
 
+  console.log('entity -> ', entity);
+
   // Icons.
   var icons = '';
   for (var objType in ICONS) {
@@ -1829,6 +1831,8 @@ function printEntity(entity, onDoubleClick) {
 
   // Name.
   var entityName = entity.id;
+  console.log('entityName -> ', entityName);
+
   var type = 'id';
   if (!entity.isScene && !entityName && entity.getAttribute('class')) {
     entityName = entity.getAttribute('class').split(' ')[0];
@@ -1838,14 +1842,16 @@ function printEntity(entity, onDoubleClick) {
     type = 'mixin';
   }
 
+  if (!entityName.toLowerCase().includes('box')) {
+    return '';
+  }
+
+  // console.log('entityName -> ', entityName);
+  // console.log('type -> ', type);
+
   return _react2.default.createElement(
     'span',
     { className: 'entityPrint', onDoubleClick: onDoubleClick },
-    _react2.default.createElement(
-      'span',
-      { className: 'entityTagName' },
-      '<' + entity.tagName.toLowerCase()
-    ),
     entityName && _react2.default.createElement(
       'span',
       { className: 'entityName', 'data-entity-name-type': type },
@@ -1853,14 +1859,8 @@ function printEntity(entity, onDoubleClick) {
       entityName
     ),
     !!icons && _react2.default.createElement('span', {
-      className: 'entityIcons',
-      dangerouslySetInnerHTML: { __html: icons }
-    }),
-    _react2.default.createElement(
-      'span',
-      { className: 'entityCloseTag' },
-      '>'
-    )
+      className: 'entityIcons'
+    })
   );
 }
 
@@ -19791,7 +19791,7 @@ var CommonComponents = function (_React$Component) {
     key: 'renderCommonAttributes',
     value: function renderCommonAttributes() {
       var entity = this.props.entity;
-      var components = entity ? entity.components : {};
+      // const components = entity ? entity.components : {};
       return ['position', 'rotation', 'scale', 'visible'].map(function (componentName) {
         var schema = AFRAME.components[componentName].schema;
         var data = entity.object3D[componentName];
@@ -21169,6 +21169,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { printEntity, removeEntity, cloneEntity } from '../../lib/entity';
+
 
 var Events = __webpack_require__(5);
 
@@ -21209,13 +21211,14 @@ var Entity = function (_React$Component) {
       var tagName = entity.tagName.toLowerCase();
 
       // Clone and remove buttons if not a-scene.
-      var cloneButton = tagName === 'a-scene' ? null : _react2.default.createElement('a', {
-        onClick: function onClick() {
-          return (0, _entity.cloneEntity)(entity);
-        },
-        title: 'Clone entity',
-        className: 'button fa fa-clone'
-      });
+      // const cloneButton =
+      //   tagName === 'a-scene' ? null : (
+      //     <a
+      //       onClick={() => cloneEntity(entity)}
+      //       title="Clone entity"
+      //       className="button fa fa-clone"
+      //     />
+      //   );
       var removeButton = tagName === 'a-scene' ? null : _react2.default.createElement('a', {
         onClick: function onClick(event) {
           event.stopPropagation();
@@ -21226,7 +21229,7 @@ var Entity = function (_React$Component) {
       });
 
       // Add spaces depending on depth.
-      var pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
+      // const pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
       var collapse = void 0;
       if (entity.children.length > 0 && !isFiltering) {
         collapse = _react2.default.createElement('span', {
@@ -21241,11 +21244,13 @@ var Entity = function (_React$Component) {
 
       // Visibility button.
       var visible = tagName === 'a-scene' ? entity.object3D.visible : entity.getAttribute('visible');
-      var visibilityButton = _react2.default.createElement('i', {
-        title: 'Toggle entity visibility',
-        className: 'fa ' + (visible ? 'fa-eye' : 'fa-eye-slash'),
-        onClick: this.toggleVisibility
-      });
+      // const visibilityButton = (
+      //   <i
+      //     title="Toggle entity visibility"
+      //     className={'fa ' + (visible ? 'fa-eye' : 'fa-eye-slash')}
+      //     onClick={this.toggleVisibility}
+      //   />
+      // );
 
       // Class name.
       var className = (0, _classnames2.default)({
@@ -21261,10 +21266,9 @@ var Entity = function (_React$Component) {
         _react2.default.createElement(
           'span',
           null,
-          visibilityButton,
           _react2.default.createElement('span', {
-            className: 'entityChildPadding',
-            dangerouslySetInnerHTML: { __html: pad }
+            className: 'entityChildPadding'
+            // dangerouslySetInnerHTML={{ __html: pad }}
           }),
           collapse,
           (0, _entity.printEntity)(entity, this.onDoubleClick)
@@ -21272,7 +21276,6 @@ var Entity = function (_React$Component) {
         _react2.default.createElement(
           'span',
           { className: 'entityActions' },
-          cloneButton,
           removeButton
         )
       );
@@ -21696,8 +21699,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { saveBlob, saveString } from '../../lib/utils';
 
-var LOCALSTORAGE_MOCAP_UI = 'aframeinspectormocapuienabled';
+
+// const LOCALSTORAGE_MOCAP_UI = 'aframeinspectormocapuienabled';
 
 function filterHelpers(scene, visible) {
   scene.traverse(function (o) {

@@ -15,7 +15,7 @@ import Clipboard from 'clipboard';
 import { saveBlob } from '../../lib/utils';
 
 // @todo Take this out and use updateEntity?
-function changeId(componentName, value) {
+function changeId (componentName, value) {
   var entity = AFRAME.INSPECTOR.selectedEntity;
   if (entity.id !== value) {
     entity.id = value;
@@ -28,7 +28,7 @@ export default class CommonComponents extends React.Component {
     entity: PropTypes.object
   };
 
-  componentDidMount() {
+  componentDidMount () {
     Events.on('entityupdate', detail => {
       if (detail.entity !== this.props.entity) {
         return;
@@ -52,9 +52,9 @@ export default class CommonComponents extends React.Component {
     });
   }
 
-  renderCommonAttributes() {
+  renderCommonAttributes () {
     const entity = this.props.entity;
-    const components = entity ? entity.components : {};
+    // const components = entity ? entity.components : {};
     return ['position', 'rotation', 'scale', 'visible'].map(componentName => {
       const schema = AFRAME.components[componentName].schema;
       var data = entity.object3D[componentName];
@@ -81,11 +81,11 @@ export default class CommonComponents extends React.Component {
     });
   }
 
-  exportToGLTF() {
+  exportToGLTF () {
     const entity = this.props.entity;
     AFRAME.INSPECTOR.exporters.gltf.parse(
       entity.object3D,
-      function(buffer) {
+      function (buffer) {
         const blob = new Blob([buffer], { type: 'application/octet-stream' });
         saveBlob(blob, (entity.id || 'entity') + '.glb');
       },
@@ -93,7 +93,7 @@ export default class CommonComponents extends React.Component {
     );
   }
 
-  render() {
+  render () {
     const entity = this.props.entity;
     if (!entity) {
       return <div />;
