@@ -1,5 +1,6 @@
 import React from 'react';
 var Events = require('../lib/Events.js');
+import entityConfig from '../config/entity';
 
 import { equal } from '../lib/utils.js';
 
@@ -537,8 +538,6 @@ export function printEntity (entity, onDoubleClick) {
     return '';
   }
 
-  console.log('entity -> ', entity);
-
   // Icons.
   let icons = '';
   for (let objType in ICONS) {
@@ -550,7 +549,7 @@ export function printEntity (entity, onDoubleClick) {
 
   // Name.
   let entityName = entity.id;
-  console.log('entityName -> ', entityName);
+  // console.log('entityName -> ', entityName);
 
   let type = 'id';
   if (!entity.isScene && !entityName && entity.getAttribute('class')) {
@@ -560,8 +559,7 @@ export function printEntity (entity, onDoubleClick) {
     entityName = entity.getAttribute('mixin').split(' ')[0];
     type = 'mixin';
   }
-
-  if (!entityName.toLowerCase().includes('box')) {
+  if (!entityConfig.map(param => entityName.toLowerCase().includes(param)).reduce((a, b) => a || b, false)) {
     return '';
   }
 

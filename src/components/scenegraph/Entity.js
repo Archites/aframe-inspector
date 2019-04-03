@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // import { printEntity, removeEntity, cloneEntity } from '../../lib/entity';
 import { printEntity, removeEntity } from '../../lib/entity';
+import entityConfig from '../../config/entity';
 
 const Events = require('../../lib/Events.js');
 
@@ -36,8 +37,8 @@ export default class Entity extends React.Component {
   };
 
   render () {
-    const isFiltering = this.props.isFiltering;
-    const isExpanded = this.props.isExpanded;
+    // const isFiltering = this.props.isFiltering;
+    // const isExpanded = this.props.isExpanded;
     const entity = this.props.entity;
     const tagName = entity.tagName.toLowerCase();
 
@@ -64,19 +65,19 @@ export default class Entity extends React.Component {
 
     // Add spaces depending on depth.
     // const pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
-    let collapse;
-    if (entity.children.length > 0 && !isFiltering) {
-      collapse = (
-        <span
-          onClick={() => this.props.toggleExpandedCollapsed(entity)}
-          className={`collapsespace fa ${
-            isExpanded ? 'fa-caret-down' : 'fa-caret-right'
-          }`}
-        />
-      );
-    } else {
-      collapse = <span className="collapsespace" />;
-    }
+    // let collapse;
+    // if (entity.children.length > 0 && !isFiltering) {
+    //   collapse = (
+    //     <span
+    //       onClick={() => this.props.toggleExpandedCollapsed(entity)}
+    //       className={`collapsespace fa ${
+    //         isExpanded ? 'fa-caret-down' : 'fa-caret-right'
+    //       }`}
+    //     />
+    //   );
+    // } else {
+    //   collapse = <span className="collapsespace" />;
+    // }
 
     // Visibility button.
     const visible =
@@ -96,18 +97,19 @@ export default class Entity extends React.Component {
       active: this.props.isSelected,
       entity: true,
       novisible: !visible,
-      option: true
+      option: true,
+      invisible: !entityConfig.map(param => entity.id.toLowerCase().includes(param)).reduce((a, b) => a || b, false)
     });
 
     return (
       <div className={className} onClick={this.onClick}>
         <span>
           {/* {visibilityButton} */}
-          <span
+          {/* <span
             className="entityChildPadding"
             // dangerouslySetInnerHTML={{ __html: pad }}
           />
-          {collapse}
+          {collapse} */}
           {printEntity(entity, this.onDoubleClick)}
         </span>
         <span className="entityActions">
