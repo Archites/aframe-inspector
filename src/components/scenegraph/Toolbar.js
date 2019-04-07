@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
+import firebase from 'firebase';
 import Events from '../../lib/Events.js';
 // import { saveBlob, saveString } from '../../lib/utils';
 import { saveBlob } from '../../lib/utils';
@@ -44,6 +45,18 @@ export default class Toolbar extends React.Component {
     this.state = {
       isPlaying: false
     };
+
+    var config = {
+      apiKey: 'AIzaSyA8_QEUXbgz3qZTAQkYldpMNBuVd7uv3-Y',
+      authDomain: 'vr-chitech.firebaseapp.com',
+      databaseURL: 'https://vr-chitech.firebaseio.com',
+      projectId: 'vr-chitech',
+      storageBucket: 'vr-chitech.appspot.com',
+      messagingSenderId: '294689746221'
+    };
+
+    firebase.initializeApp(config);
+    // console.log(firebase);
   }
 
   exportSceneToGLTF () {
@@ -70,13 +83,22 @@ export default class Toolbar extends React.Component {
    * Try to write changes with aframe-inspector-watcher.
    */
   writeChanges = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:51234/save');
-    xhr.onerror = () => {
-      alert('aframe-watcher not running. This feature requires a companion service running locally. npm install aframe-watcher to save changes back to file. Read more at supermedium.com/aframe-watcher');
-    };
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('POST', 'http://localhost:51234/save');
+    // xhr.onerror = () => {
+    //   alert('aframe-watcher not running. This feature requires a companion service running locally. npm install aframe-watcher to save changes back to file. Read more at supermedium.com/aframe-watcher');
+    // };
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
+    firebase.database().ref('field1').on('value', function (snapshot) {
+      const thisUpdate = AFRAME.INSPECTOR.history.updates;
+      let field1 = snapshot.val();
+      // field1 = field1.split('<');
+      console.log(field1);
+      // const a = field1.some((a) => a.includes('id="redBox"'));
+      console.log(thisUpdate);
+    });
+    // console.log(AFRAME.INSPECTOR.history.updates);
   };
 
   toggleScenePlaying = () => {
