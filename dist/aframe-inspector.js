@@ -69419,7 +69419,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       //   ]
       // ],
 
-      Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]]
+      Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]],
 
       // XYZ: [
       //   [
@@ -69453,16 +69453,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       //   ]
       // ],
 
-      // XZ: [
-      //   [
-      //     new THREE.Mesh(
-      //       new THREE.PlaneBufferGeometry(0.29, 0.29),
-      //       new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })
-      //     ),
-      //     [0.15, 0, 0.15],
-      //     [-Math.PI / 2, 0, 0]
-      //   ]
-      // ]
+      XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })), [0.15, 0, 0.15], [-Math.PI / 2, 0, 0]]]
     };
 
     this.pickerGizmos = {
@@ -69478,7 +69469,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       //   ]
       // ],
 
-      Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]]
+      Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
 
       // XYZ: [
       //   [new THREE.Mesh(new THREE.OctahedronGeometry(0.2, 0), pickerMaterial)]
@@ -69505,16 +69496,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       //   ]
       // ],
 
-      // XZ: [
-      //   [
-      //     new THREE.Mesh(
-      //       new THREE.PlaneBufferGeometry(0.4, 0.4),
-      //       pickerMaterial
-      //     ),
-      //     [0.2, 0, 0.2],
-      //     [-Math.PI / 2, 0, 0]
-      //   ]
-      // ]
+      XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), pickerMaterial), [0.2, 0, 0.2], [-Math.PI / 2, 0, 0]]]
     };
 
     this.setActivePlane = function (axis, eye) {
@@ -70023,31 +70005,36 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
             if (tempCal > 0) {
               point.x += 0.5;
             }
-          } else if (point.x < 0) {
+          }
+          if (point.x < 0) {
             point.x = Math.round(point.x * 2) / 2;
             var _tempCal = point.x % 0.5;
             if (_tempCal > 0) {
               point.x -= 0.5;
             }
-          } else if (point.y > 0) {
+          }
+          if (point.y > 0) {
             point.y = Math.round(point.y * 2) / 2;
             var _tempCal2 = point.y % 0.5;
             if (_tempCal2 > 0) {
               point.y += 0.5;
             }
-          } else if (point.y < 0) {
+          }
+          if (point.y < 0) {
             point.y = Math.round(point.y * 2) / 2;
             var _tempCal3 = point.y % 0.5;
             if (_tempCal3 > 0) {
               point.y -= 0.5;
             }
-          } else if (point.z > 0) {
+          }
+          if (point.z > 0) {
             point.z = Math.round(point.z * 2) / 2;
             var _tempCal4 = point.z % 0.5;
             if (_tempCal4 > 0) {
               point.z += 0.5;
             }
-          } else if (point.z < 0) {
+          }
+          if (point.z < 0) {
             point.z = Math.round(point.z * 2) / 2;
             var _tempCal5 = point.z % 0.5;
             if (_tempCal5 > 0) {

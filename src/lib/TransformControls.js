@@ -249,7 +249,7 @@
             new GizmoLineMaterial({ color: 0x0000ff })
           )
         ]
-      ]
+      ],
 
       // XYZ: [
       //   [
@@ -283,16 +283,16 @@
       //   ]
       // ],
 
-      // XZ: [
-      //   [
-      //     new THREE.Mesh(
-      //       new THREE.PlaneBufferGeometry(0.29, 0.29),
-      //       new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })
-      //     ),
-      //     [0.15, 0, 0.15],
-      //     [-Math.PI / 2, 0, 0]
-      //   ]
-      // ]
+      XZ: [
+        [
+          new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(0.29, 0.29),
+            new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })
+          ),
+          [0.15, 0, 0.15],
+          [-Math.PI / 2, 0, 0]
+        ]
+      ]
     };
 
     this.pickerGizmos = {
@@ -326,7 +326,7 @@
           [0, 0, 0.6],
           [Math.PI / 2, 0, 0]
         ]
-      ]
+      ],
 
       // XYZ: [
       //   [new THREE.Mesh(new THREE.OctahedronGeometry(0.2, 0), pickerMaterial)]
@@ -353,16 +353,16 @@
       //   ]
       // ],
 
-      // XZ: [
-      //   [
-      //     new THREE.Mesh(
-      //       new THREE.PlaneBufferGeometry(0.4, 0.4),
-      //       pickerMaterial
-      //     ),
-      //     [0.2, 0, 0.2],
-      //     [-Math.PI / 2, 0, 0]
-      //   ]
-      // ]
+      XZ: [
+        [
+          new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(0.4, 0.4),
+            pickerMaterial
+          ),
+          [0.2, 0, 0.2],
+          [-Math.PI / 2, 0, 0]
+        ]
+      ]
     };
 
     this.setActivePlane = function (axis, eye) {
@@ -1109,31 +1109,36 @@
             if (tempCal > 0) {
               point.x += 0.5;
             }
-          } else if (point.x < 0) {
+          }
+          if (point.x < 0) {
             point.x = Math.round(point.x * 2) / 2;
             const tempCal = point.x % 0.5;
             if (tempCal > 0) {
               point.x -= 0.5;
             }
-          } else if (point.y > 0) {
+          }
+          if (point.y > 0) {
             point.y = Math.round(point.y * 2) / 2;
             const tempCal = point.y % 0.5;
             if (tempCal > 0) {
               point.y += 0.5;
             }
-          } else if (point.y < 0) {
+          }
+          if (point.y < 0) {
             point.y = Math.round(point.y * 2) / 2;
             const tempCal = point.y % 0.5;
             if (tempCal > 0) {
               point.y -= 0.5;
             }
-          } else if (point.z > 0) {
+          }
+          if (point.z > 0) {
             point.z = Math.round(point.z * 2) / 2;
             const tempCal = point.z % 0.5;
             if (tempCal > 0) {
               point.z += 0.5;
             }
-          } else if (point.z < 0) {
+          }
+          if (point.z < 0) {
             point.z = Math.round(point.z * 2) / 2;
             const tempCal = point.z % 0.5;
             if (tempCal > 0) {
