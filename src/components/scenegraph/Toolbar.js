@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import firebase from 'firebase';
+import JSSoup from 'jssoup';
 import Events from '../../lib/Events.js';
 // import { saveBlob, saveString } from '../../lib/utils';
 import { saveBlob } from '../../lib/utils';
@@ -90,15 +91,31 @@ export default class Toolbar extends React.Component {
     // };
     // xhr.setRequestHeader('Content-Type', 'application/json');
     // xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
-    firebase.database().ref('field1').on('value', function (snapshot) {
-      const thisUpdate = AFRAME.INSPECTOR.history.updates;
-      let field1 = snapshot.val();
-      // field1 = field1.split('<');
-      console.log(field1);
-      // const a = field1.some((a) => a.includes('id="redBox"'));
-      console.log(thisUpdate);
+    // const ref = firebase.database().ref(window.location.pathname.replace(/\//g, ''));
+    const ref = firebase.database().ref('room1');
+    const historyUpdate = AFRAME.INSPECTOR.history.updates;
+
+    if (Object.keys(historyUpdate).length === 0) {
+      console.log('Do not update history'); return;
+    }
+
+    ref.on('value', function (snapshot) {
+      if (!snapshot.exists()) {
+        console.log('Firebase has not references database'); return;
+      }
+      const htmlTag = snapshot.val();
+      let soup = new JSSoup(htmlTag);
+
+      Object.keys(historyUpdate).forEach(key => {
+        if (soup.find('a-entity', {id: key}) !== undefined) {
+          if ('position' in historyUpdate[key]) soup.find('a-entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
+          if ('rotation' in historyUpdate[key]) soup.find('a-entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
+          ref.set(soup.prettify()).then(() => console.log('Save success'));
+        } else {
+          console.log('test version');
+        }
+      });
     });
-    // console.log(AFRAME.INSPECTOR.history.updates);
   };
 
   toggleScenePlaying = () => {
