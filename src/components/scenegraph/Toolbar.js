@@ -107,7 +107,7 @@ export default class Toolbar extends React.Component {
       let soup = new JSSoup(htmlTag);
 
       Object.keys(historyUpdate).forEach(key => {
-        if (soup.find('a-entity', {id: key}) !== undefined) {
+        if (soup.find('Entity', {id: key}) !== undefined) {
           if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
           if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
           ref.set(soup.prettify()).then(() => console.log('Save success'));
