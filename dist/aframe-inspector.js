@@ -68400,8 +68400,8 @@ var Toolbar = function (_React$Component) {
 
         Object.keys(historyUpdate).forEach(function (key) {
           if (soup.find('a-entity', { id: key }) !== undefined) {
-            if ('position' in historyUpdate[key]) soup.find('a-entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
-            if ('rotation' in historyUpdate[key]) soup.find('a-entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
+            if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
+            if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
             ref.set(soup.prettify()).then(function () {
               return console.log('Save success');
             });
