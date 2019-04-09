@@ -110,7 +110,10 @@ export default class Toolbar extends React.Component {
         if (soup.find('Entity', {id: key}) !== undefined) {
           if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
           if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
-          ref.set(soup.prettify()).then(() => console.log('Save success'));
+          ref.set(soup.prettify()).then(() => {
+            console.log('Save success');
+            process.exit(0);
+          });
         } else {
           console.log('test version');
         }
