@@ -4,12 +4,12 @@ var classNames = require('classnames');
 
 var TransformButtons = [
   { value: 'translate', icon: 'fa-arrows-alt' },
-  { value: 'rotate', icon: 'fa-repeat' },
-  { value: 'scale', icon: 'fa-expand' }
+  { value: 'rotate', icon: 'fa-repeat' }
+  // { value: 'scale', icon: 'fa-expand' }
 ];
 
 export default class TransformToolbar extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       selectedTransform: 'translate',
@@ -17,7 +17,7 @@ export default class TransformToolbar extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     Events.on('transformmodechange', mode => {
       this.setState({ selectedTransform: mode });
     });
@@ -45,7 +45,7 @@ export default class TransformToolbar extends React.Component {
 
   renderTransformButtons = () => {
     return TransformButtons.map(
-      function(option, i) {
+      function (option, i) {
         var selected = option.value === this.state.selectedTransform;
         var classes = classNames({
           button: true,
@@ -66,11 +66,11 @@ export default class TransformToolbar extends React.Component {
     );
   };
 
-  render() {
+  render () {
     return (
       <div id="transformToolbar" className="toolbarButtons">
         {this.renderTransformButtons()}
-        <span className="local-transform">
+        {/* <span className="local-transform">
           <input
             id="local"
             type="checkbox"
@@ -87,7 +87,7 @@ export default class TransformToolbar extends React.Component {
           >
             local
           </label>
-        </span>
+        </span> */}
       </div>
     );
   }
