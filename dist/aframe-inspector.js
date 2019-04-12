@@ -69546,7 +69546,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       //   ]
       // ],
 
-      Y: [[new THREE.Line(new CircleGeometry(1, 'y', 0.5), new GizmoLineMaterial({ color: 0x00ff00 }))]]
+      Y: [[new THREE.Line(new CircleGeometry(1, 'y', 1), new GizmoLineMaterial({ color: 0x00ff00 }))]]
 
       // Z: [
       //   [

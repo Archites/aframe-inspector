@@ -461,7 +461,7 @@
       Y: [
         [
           new THREE.Line(
-            new CircleGeometry(1, 'y', 0.5),
+            new CircleGeometry(1, 'y', 1),
             new GizmoLineMaterial({ color: 0x00ff00 })
           )
         ]
