@@ -14,7 +14,7 @@ const Events = require('./Events');
 /**
  * Transform controls stuff mostly.
  */
-function Viewport(inspector) {
+function Viewport (inspector) {
   // Initialize raycaster and picking in differentpmodule.
   const mouseCursor = initRaycaster(inspector);
   const sceneEl = inspector.sceneEl;
@@ -39,7 +39,7 @@ function Viewport(inspector) {
   selectionBox.visible = false;
   sceneHelpers.add(selectionBox);
 
-  function updateHelpers(object) {
+  function updateHelpers (object) {
     object.traverse(node => {
       if (inspector.helpers[node.uuid]) {
         inspector.helpers[node.uuid].update();
@@ -103,7 +103,8 @@ function Viewport(inspector) {
 
   Events.on('entityupdate', detail => {
     if (inspector.selectedEntity.object3DMap['mesh']) {
-      selectionBox.update(inspector.selected);
+      // selectionBox.update(inspector.selected);
+      selectionBox.update();
     }
   });
 
@@ -119,13 +120,13 @@ function Viewport(inspector) {
     transformControls.setCamera(data.camera);
   });
 
-  function disableControls() {
+  function disableControls () {
     mouseCursor.disable();
     transformControls.dispose();
     controls.enabled = false;
   }
 
-  function enableControls() {
+  function enableControls () {
     mouseCursor.enable();
     transformControls.activate();
     controls.enabled = true;
