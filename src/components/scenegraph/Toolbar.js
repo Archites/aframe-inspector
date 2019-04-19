@@ -5,6 +5,7 @@ import JSSoup from 'jssoup';
 import Events from '../../lib/Events.js';
 // import { saveBlob, saveString } from '../../lib/utils';
 import { saveBlob } from '../../lib/utils';
+import firebaseConfig from '../../config/firebase';
 
 // const LOCALSTORAGE_MOCAP_UI = 'aframeinspectormocapuienabled';
 
@@ -47,16 +48,7 @@ export default class Toolbar extends React.Component {
       isPlaying: false
     };
 
-    var config = {
-      apiKey: 'AIzaSyA8_QEUXbgz3qZTAQkYldpMNBuVd7uv3-Y',
-      authDomain: 'vr-chitech.firebaseapp.com',
-      databaseURL: 'https://vr-chitech.firebaseio.com',
-      projectId: 'vr-chitech',
-      storageBucket: 'vr-chitech.appspot.com',
-      messagingSenderId: '294689746221'
-    };
-
-    firebase.initializeApp(config);
+    firebase.initializeApp(firebaseConfig);
     // console.log(firebase);
   }
 
