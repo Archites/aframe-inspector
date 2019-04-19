@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import firebase from 'firebase';
 import JSSoup from 'jssoup';
+import { withRouter } from 'react-router-dom';
 import Events from '../../lib/Events.js';
 // import { saveBlob, saveString } from '../../lib/utils';
 import { saveBlob } from '../../lib/utils';
@@ -40,7 +41,7 @@ function slugify (text) {
 /**
  * Tools and actions.
  */
-export default class Toolbar extends React.Component {
+class Toolbar extends React.Component {
   constructor (props) {
     super(props);
 
@@ -48,8 +49,9 @@ export default class Toolbar extends React.Component {
       isPlaying: false
     };
 
+    console.log(this.props);
+
     firebase.initializeApp(firebaseConfig);
-    // console.log(firebase);
   }
 
   exportSceneToGLTF () {
@@ -84,7 +86,13 @@ export default class Toolbar extends React.Component {
     // xhr.setRequestHeader('Content-Type', 'application/json');
     // xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
     // const ref = firebase.database().ref(window.location.pathname.replace(/\//g, ''));
-    const ref = firebase.database().ref('room1');
+    // eslint-disable-next-line react/prop-types
+    const { location } = this.props;
+    const ref = firebase.database()
+      .ref(location.state.uId)
+      .child('room')
+      .child(location.state.roomId)
+      .child('element');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 
     console.log(historyUpdate);
@@ -166,3 +174,5 @@ export default class Toolbar extends React.Component {
     );
   }
 }
+
+export default withRouter(Toolbar);
