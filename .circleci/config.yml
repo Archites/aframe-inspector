@@ -21,7 +21,7 @@ jobs:
             - ./node_modules
       - run:
           name: Run firebase script
-          run: CONFIG_FIREBASE="echo ${firebase} | base64 --decode"
+          run: CONFIG_FIREBASE=echo $firebase | base64 --decode
           command: node .circleci/firebase-script.js $CONFIG_FIREBASE
 workflows:
   version: 2
