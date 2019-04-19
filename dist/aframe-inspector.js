@@ -68387,6 +68387,8 @@ var Toolbar = function (_React$Component) {
       var ref = _firebase2.default.database().ref('room1');
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
+      console.log(historyUpdate);
+
       if (Object.keys(historyUpdate).length === 0) {
         console.log('Do not update history');return;
       }
@@ -68640,7 +68642,9 @@ var React = __webpack_require__(1);
 var Events = __webpack_require__(5);
 var classNames = __webpack_require__(21);
 
-var TransformButtons = [{ value: 'translate', icon: 'fa-arrows-alt' }, { value: 'rotate', icon: 'fa-repeat' }, { value: 'scale', icon: 'fa-expand' }];
+var TransformButtons = [{ value: 'translate', icon: 'fa-arrows-alt' }, { value: 'rotate', icon: 'fa-repeat'
+  // { value: 'scale', icon: 'fa-expand' }
+}];
 
 var TransformToolbar = function (_React$Component) {
   _inherits(TransformToolbar, _React$Component);
@@ -68708,27 +68712,7 @@ var TransformToolbar = function (_React$Component) {
       return React.createElement(
         'div',
         { id: 'transformToolbar', className: 'toolbarButtons' },
-        this.renderTransformButtons(),
-        React.createElement(
-          'span',
-          { className: 'local-transform' },
-          React.createElement('input', {
-            id: 'local',
-            type: 'checkbox',
-            title: 'Toggle between local and world space transforms',
-            checked: this.state.localSpace || this.state.selectedTransform === 'scale',
-            disabled: this.state.selectedTransform === 'scale',
-            onChange: this.onLocalChange
-          }),
-          React.createElement(
-            'label',
-            {
-              htmlFor: 'local',
-              title: 'Toggle between local and world space transforms'
-            },
-            'local'
-          )
-        )
+        this.renderTransformButtons()
       );
     }
   }]);

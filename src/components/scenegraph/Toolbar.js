@@ -95,6 +95,8 @@ export default class Toolbar extends React.Component {
     const ref = firebase.database().ref('room1');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 
+    console.log(historyUpdate);
+
     if (Object.keys(historyUpdate).length === 0) {
       console.log('Do not update history'); return;
     }
