@@ -4,6 +4,9 @@ require('firebase/storage')
 global.XMLHttpRequest = require("xhr2")
 
 var config = JSON.parse(process.argv[2].toString())
+console.log(process.argv)
+console.log(process.argv[2])
+console.log(process.argv[2].toString())
 console.log(config)
 
 firebase.initializeApp(config)
