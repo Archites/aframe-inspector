@@ -20,7 +20,10 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          command: echo "export CONFIG_FIREBASE=echo $firebase | base64 --decode" >> $BASH_ENV
+          command: echo 'export CONFIG_FIREBASE="$(echo $firebase | base64 --decode)"' >> $BASH_ENV
+      - run: # test what branch we're on.
+          name: "What branch am I on?"
+          command: echo ${CONFIG_FIREBASE}
       - run:
           name: Run firebase script
           command: node .circleci/firebase-script.js $CONFIG_FIREBASE
