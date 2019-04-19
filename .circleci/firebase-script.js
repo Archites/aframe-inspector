@@ -4,10 +4,10 @@ require('firebase/storage')
 global.XMLHttpRequest = require("xhr2")
 
 var config = process.argv[2]
-console.log(config)
+console.log(process.argv)
 
 
-firebase.initializeApp(config)
+// firebase.initializeApp(config)
 // var storageRef = firebase.storage().ref()
 
 // fs.readFile('./dist/aframe-inspector.js', function(err, data) {
