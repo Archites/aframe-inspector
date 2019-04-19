@@ -3,7 +3,9 @@ var fs = require('fs')
 require('firebase/storage')
 global.XMLHttpRequest = require("xhr2")
 
+console.log(process.argv.slice(2))
 var config = process.argv.slice(2)
+
 
 firebase.initializeApp(config)
 var storageRef = firebase.storage().ref()
