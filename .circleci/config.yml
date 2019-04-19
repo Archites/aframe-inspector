@@ -20,10 +20,10 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          command: echo 'export CONFIG_FIREBASE="$(echo $firebase | base64 --decode)"' >> $BASH_ENV
+          command: echo 'export DECODE_FIREBASE="$(echo $FIREBASE_CONFIG | base64 --decode)"' >> $BASH_ENV
       - run:
           name: Run firebase script
-          command: node .circleci/firebase-script.js $CONFIG_FIREBASE
+          command: node .circleci/firebase-script.js $DECODE_FIREBASE
 workflows:
   version: 2
   upload:
