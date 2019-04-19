@@ -6,7 +6,7 @@ global.XMLHttpRequest = require("xhr2")
 console.log(process.argv)
 console.log(process.argv[2])
 console.log(process.argv[2].toString())
-var config = JSON.parse(process.argv[2].toString())
+var config = process.argv[2]
 console.log(config)
 
 firebase.initializeApp(config)
