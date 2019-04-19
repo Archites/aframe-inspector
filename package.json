@@ -19,6 +19,11 @@
     "test": "jest --watch",
     "test:ci": "jest"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run dist && git add -A"
+    }
+  },
   "repository": "aframevr/aframe-inspector",
   "license": "MIT",
   "dependencies": {
