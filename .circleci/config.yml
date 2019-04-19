@@ -20,9 +20,7 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          command: |
-          CONFIG_FIREBASE="$(echo $firebase | base64 --decode)"
-          echo $CONFIG_FIREBASE
+          command: CONFIG_FIREBASE="$(echo $firebase | base64 --decode)"
       - run:
           name: Run firebase script
           command: node .circleci/firebase-script.js $CONFIG_FIREBASE
