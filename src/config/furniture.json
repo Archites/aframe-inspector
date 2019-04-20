@@ -1,0 +1,44 @@
+{
+  "bed": [
+    {
+      "name": "Brick Bed",
+      "furniture_id": "2d439ea3-b080-4f77-a61f-ecded5e9ef95",
+      "manufacturer": "Gervasoni",
+      "url": "https://storage.3d.io/archilogic/interior/gervasoni/bedroom/BrickBed/info/3d.png"
+    },
+    {
+      "name": "Afrodite Bed",
+      "furniture_id": "a10956ab-e79a-4c4e-a91b-ffdf955a53fe",
+      "manufacturer": "B&B Italia",
+      "url": "https://storage.3d.io/535e624259ee6b0200000484/2017-06-06_12-10-31_BkoXQw/snapshot.png"
+    }
+  ],
+  "chair": [
+    {
+      "name": "C2 Chair",
+      "furniture_id": "edd99bfc-a597-4fb4-bf92-04916e6d5dfc",
+      "manufacturer": "ODESD2",
+      "url": "https://storage.3d.io/535e624259ee6b0200000484/2017-02-06_11-47-35_DMK52u/3d.png"
+    },
+    {
+      "name": "Panton Chair",
+      "furniture_id": "c81f93d1-647d-4150-b73c-332002241731",
+      "manufacturer": "Vitra",
+      "url": "https://storage.3d.io/archilogic/interior/vitra/chairs/Panton-Chair/info/3d.png"
+    }
+  ],
+  "sofa": [
+    {
+      "name": "Place Sofa",
+      "furniture_id": "87ee8ba3-c4c6-4fe6-b2c3-1361a8f9f470",
+      "manufacturer": "Vitra",
+      "url": "https://storage.3d.io/535e624259ee6b0200000484/2017-12-22_18-12-40_MTctA1/snapshot.png"
+    },
+    {
+      "name": "Mex",
+      "furniture_id": "2b849f61-a401-40c4-802b-038fcaa60880",
+      "manufacturer": "Cassina",
+      "url": "https://storage.3d.io/archilogic/interior/cassina/relaxing/MexCube/info/3d.png"
+    }
+  ]
+}

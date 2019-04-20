@@ -5,6 +5,14 @@ import Select from 'react-select';
 
 var DELIMITER = ' ';
 
+function changeId (componentName, value) {
+  var entity = AFRAME.INSPECTOR.selectedEntity;
+  if (entity.id !== value) {
+    entity.id = value;
+    Events.emit('entityidchange', entity);
+  }
+}
+
 export default class AddComponent extends React.Component {
   static propTypes = {
     entity: PropTypes.object
@@ -17,7 +25,24 @@ export default class AddComponent extends React.Component {
   addComponent = value => {
     let componentName = value.value;
 
+    var id = 1;
     var entity = this.props.entity;
+    var childrenEntity = AFRAME.INSPECTOR.scene.children;
+    childrenEntity.map(item => {
+      if (item.el !== undefined && item.el.id !== undefined) {
+        console.log('Sub', item.el.id.substring(0, item.el.id.length - 1));
+        if (item.el.id.substring(0, item.el.id.length - 1) === componentName) {
+          id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+          id++;
+          console.log('ID', id);
+        }
+        console.log('Item', item.el.id);
+      }
+    });
+    console.log(entity.id);
+    if (entity.id.substring(0, entity.id.length - 1) !== componentName) {
+      changeId(entity, componentName + id);
+    }
     var packageName;
     var selectedOption = this.options.filter(function(option) {
       return option.value === componentName;
@@ -42,16 +67,20 @@ export default class AddComponent extends React.Component {
     const usedComponents = Object.keys(this.props.entity.components);
     var commonOptions = Object.keys(AFRAME.components)
       .filter(function(componentName) {
-        return (
-          AFRAME.components[componentName].multiple ||
-          usedComponents.indexOf(componentName) === -1
-        );
+        if (componentName === 'closet' || componentName === 'door' ||
+        componentName === 'floor' || componentName === 'kitchen' ||
+        componentName === 'wall' || componentName === 'window') {
+          return (
+            AFRAME.components[componentName].multiple ||
+            usedComponents.indexOf(componentName) === -1
+          );
+        }
       })
       .sort()
       .map(function(value) {
         return { value: value, label: value, origin: 'loaded' };
       });
-
+    
     this.options = commonOptions;
     this.options = this.options.sort(function(a, b) {
       return a.label === b.label ? 0 : a.label < b.label ? -1 : 1;

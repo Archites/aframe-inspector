@@ -4,7 +4,10 @@ import { InputWidget } from '../widgets';
 import DEFAULT_COMPONENTS from './DefaultComponents';
 import PropertyRow from './PropertyRow';
 import Collapsible from '../Collapsible';
-import Mixins from './Mixins';
+import furniture from '../../config/furniture';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
 import {
   updateEntity,
   getEntityClipboardRepresentation,
@@ -13,6 +16,30 @@ import {
 import Events from '../../lib/Events';
 import Clipboard from 'clipboard';
 import { saveBlob } from '../../lib/utils';
+
+const options = [
+  {
+    value: 'chair',
+    label: 'Chair'
+  },
+  {
+    value: 'bed',
+    label: 'Bed'
+  },
+  {
+    value: 'sofa',
+    label: 'Sofa'
+  }
+];
+
+const furImageDiv = {
+  display: 'inline-block',
+  width: '165.5px'
+};
+
+const furImageSize = {
+  width: '100%'
+};
 
 // @todo Take this out and use updateEntity?
 function changeId (componentName, value) {
@@ -27,6 +54,11 @@ export default class CommonComponents extends React.Component {
   static propTypes = {
     entity: PropTypes.object
   };
+  state = {
+    furniture: {},
+    selectedOption: 'Select furniture',
+    isShow: false
+  }
 
   componentDidMount () {
     Events.on('entityupdate', detail => {
@@ -50,6 +82,22 @@ export default class CommonComponents extends React.Component {
     clipboard.on('error', e => {
       // @todo Show the error on the UI
     });
+  }
+
+  renderFurnitureImage = () => {
+    const furnitureData = furniture[this.state.selectedOption.value];
+    if (!this.state.isShow) {
+      return null;
+    }
+    return (
+      <div>
+        {furnitureData.map((item, index) => (
+          <div key={index} onClick={() => this.addComponent(item.furniture_id, this.state.selectedOption.value)} style={furImageDiv}>
+            <img src={item.url} style={furImageSize}/>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   renderCommonAttributes () {
@@ -81,6 +129,70 @@ export default class CommonComponents extends React.Component {
     });
   }
 
+  addComponent = (entityID, type) => {
+    const value = {
+      value: 'io3d-furniture',
+      label: 'io3d-furniture'
+    };
+    let componentName = value.value;
+
+    var id = 1;
+    var entity = this.props.entity;
+    var childrenEntity = AFRAME.INSPECTOR.scene.children;
+    childrenEntity.map(item => {
+      if (item.el !== undefined && item.el.id !== undefined) {
+        if (item.el.id.substring(0, item.el.id.length - 1) === type) {
+          id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+          id++;
+        }
+      }
+    });
+    if (entity.id.substring(0, entity.id.length - 1) !== type) {
+      changeId(entity, type + id);
+    }
+    // const newEntity = `<a-entity io3d-furniture="${entityID}"></a-entity>`
+    var packageName;
+    var selectedOption = this.options.filter(function(option) {
+      return option.value === componentName;
+    })[0];
+
+    if (AFRAME.components[componentName].multiple) {
+      const id = prompt(
+        `Provide an ID for this component (e.g., 'foo' for ${componentName}__foo).`
+      );
+      componentName = id ? `${componentName}__${id}` : componentName;
+    }
+    entity.setAttribute('io3d-furniture', `id:${entityID}`);
+    entity.setAttribute(componentName, '');
+    Events.emit('componentadd', { entity: entity, component: componentName });
+    ga('send', 'event', 'Components', 'addComponent', componentName);
+  };
+
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+    this.setState({isShow: true});
+  }
+
+  getComponentsOptions () {
+    const usedComponents = Object.keys(this.props.entity.components);
+    var commonOptions = Object.keys(AFRAME.components)
+      .filter(function (componentName) {
+        return (
+          AFRAME.components[componentName].multiple ||
+          usedComponents.indexOf(componentName) === -1
+        );
+      })
+      .sort()
+      .map(function (value) {
+        return { value: value, label: value, origin: 'loaded' };
+      });
+
+    this.options = commonOptions;
+    this.options = this.options.sort(function (a, b) {
+      return a.label === b.label ? 0 : a.label < b.label ? -1 : 1;
+    });
+  }
+
   exportToGLTF () {
     const entity = this.props.entity;
     AFRAME.INSPECTOR.exporters.gltf.parse(
@@ -98,6 +210,9 @@ export default class CommonComponents extends React.Component {
     if (!entity) {
       return <div />;
     }
+
+    this.getComponentsOptions();
+
     const entityButtons = (
       <div>
         <a
@@ -137,12 +252,8 @@ export default class CommonComponents extends React.Component {
               value={entity.id}
             />
           </div>
-          <div className="propertyRow">
-            <label className="text">class</label>
-            <span>{entity.getAttribute('class')}</span>
-          </div>
-          {this.renderCommonAttributes()}
-          <Mixins entity={entity} />
+          <Dropdown options={options} onChange={this.handleChange} value={this.state.selectedOption} placeholder="Select an option" />
+          {this.renderFurnitureImage()}
         </div>
       </Collapsible>
     );

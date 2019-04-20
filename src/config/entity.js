@@ -1,4 +1,12 @@
 export default [
   'box',
-  'floor'
+  'closet',
+  'door',
+  'floor',
+  'kitchen',
+  'wall',
+  'window',
+  'bed',
+  'chair',
+  'sofa'
 ];
