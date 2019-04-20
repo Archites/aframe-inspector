@@ -1,4 +1,7 @@
 export default [
   'box',
-  'floor'
+  'floor',
+  'bed',
+  'chair',
+  'sofa'
 ];
