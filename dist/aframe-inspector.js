@@ -70581,14 +70581,6 @@ var Toolbar = function (_React$Component) {
             className: 'button fa ' + (this.state.isPlaying ? 'fa-pause' : 'fa-play'),
             title: this.state.isPlaying ? 'Pause scene' : 'Resume scene',
             onClick: this.toggleScenePlaying }),
-          _react2.default.createElement(
-            'a',
-            {
-              className: 'gltfIcon',
-              title: 'Export to GLTF',
-              onClick: this.exportSceneToGLTF },
-            _react2.default.createElement('img', { src:  true ? 'https://aframe.io/aframe-inspector/assets/gltf.svg' : '../assets/gltf.svg' })
-          ),
           _react2.default.createElement('a', {
             className: watcherClassNames,
             title: watcherTitle,
