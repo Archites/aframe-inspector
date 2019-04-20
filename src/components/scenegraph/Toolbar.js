@@ -94,8 +94,20 @@ class Toolbar extends React.Component {
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
     var childrenEntity = AFRAME.INSPECTOR.scene.children;
 
-    console.log(historyUpdate);
-    console.log(childrenEntity);
+    // console.log(historyUpdate);
+    // console.log(childrenEntity);
+
+    childrenEntity.map(item => {
+      // if (item.el !== undefined && item.el.id !== undefined) {
+      //   console.log('Sub', item.el.id.substring(0, item.el.id.length - 1));
+      //   if (item.el.id.substring(0, item.el.id.length - 1) === componentName) {
+      //     id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+      //     id++;
+      //     console.log('ID', id);
+      //   }
+      console.log('Item -> ', item.el);
+      // }
+    });
 
     if (Object.keys(historyUpdate).length === 0) {
       console.log('Do not update history'); return;
