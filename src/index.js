@@ -9,6 +9,7 @@ var Shortcuts = require('./lib/shortcuts');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './components/Main';
+import { BrowserRouter } from 'react-router-dom';
 import { initCameras } from './lib/cameras';
 import { injectCSS, injectJS } from './lib/utils';
 import { createEntity } from './lib/entity';
@@ -76,7 +77,11 @@ Inspector.prototype = {
     div.id = 'aframeInspector';
     div.setAttribute('data-aframe-inspector', 'app');
     document.body.appendChild(div);
-    ReactDOM.render(<Main />, div);
+    ReactDOM.render(
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
+    , div);
 
     this.scene = this.sceneEl.object3D;
     this.helpers = {};
