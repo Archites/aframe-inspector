@@ -1301,7 +1301,6 @@
           scope.object.quaternion.copy(quaternionXYZ);
         } else if (scope.space === 'world') {
           // TODO: Rotate
-          // console.log(point.x, point.y, point.z);
           rotation.set(
             Math.atan2(point.z, point.y),
             Math.atan2(point.x, point.z),
