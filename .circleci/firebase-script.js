@@ -4,13 +4,14 @@ require('firebase/storage')
 global.XMLHttpRequest = require("xhr2")
 
 var config = {
-  apiKey: "AIzaSyA8_QEUXbgz3qZTAQkYldpMNBuVd7uv3-Y",
-  authDomain: "vr-chitech.firebaseapp.com",
-  databaseURL: "https://vr-chitech.firebaseio.com",
-  projectId: "vr-chitech",
-  storageBucket: "vr-chitech.appspot.com",
-  messagingSenderId: "294689746221"
+  apiKey: process.argv[2],
+  authDomain: process.argv[3],
+  databaseURL: process.argv[4],
+  projectId: process.argv[5],
+  storageBucket: process.argv[6],
+  messagingSenderId: process.argv[7]
 }
+
 
 firebase.initializeApp(config)
 var storageRef = firebase.storage().ref()
@@ -26,3 +27,4 @@ fs.readFile('./dist/aframe-inspector.js', function(err, data) {
     process.exit(0)
   })
 })
+

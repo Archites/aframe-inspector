@@ -2,9 +2,11 @@ import classnames from 'classnames';
 import React from 'react';
 import firebase from 'firebase';
 import JSSoup from 'jssoup';
+import { withRouter } from 'react-router-dom';
 import Events from '../../lib/Events.js';
 // import { saveBlob, saveString } from '../../lib/utils';
 import { saveBlob } from '../../lib/utils';
+import firebaseConfig from '../../config/firebase';
 
 // const LOCALSTORAGE_MOCAP_UI = 'aframeinspectormocapuienabled';
 
@@ -39,7 +41,7 @@ function slugify (text) {
 /**
  * Tools and actions.
  */
-export default class Toolbar extends React.Component {
+class Toolbar extends React.Component {
   constructor (props) {
     super(props);
 
@@ -47,17 +49,9 @@ export default class Toolbar extends React.Component {
       isPlaying: false
     };
 
-    var config = {
-      apiKey: 'AIzaSyA8_QEUXbgz3qZTAQkYldpMNBuVd7uv3-Y',
-      authDomain: 'vr-chitech.firebaseapp.com',
-      databaseURL: 'https://vr-chitech.firebaseio.com',
-      projectId: 'vr-chitech',
-      storageBucket: 'vr-chitech.appspot.com',
-      messagingSenderId: '294689746221'
-    };
+    console.log(this.props);
 
-    firebase.initializeApp(config);
-    // console.log(firebase);
+    firebase.initializeApp(firebaseConfig);
   }
 
   exportSceneToGLTF () {
@@ -92,8 +86,16 @@ export default class Toolbar extends React.Component {
     // xhr.setRequestHeader('Content-Type', 'application/json');
     // xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
     // const ref = firebase.database().ref(window.location.pathname.replace(/\//g, ''));
-    const ref = firebase.database().ref('room1');
+    // eslint-disable-next-line react/prop-types
+    const { location } = this.props;
+    const ref = firebase.database()
+      .ref(location.state.uId)
+      .child('room')
+      .child(location.state.roomId)
+      .child('element');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
+
+    console.log(historyUpdate);
 
     if (Object.keys(historyUpdate).length === 0) {
       console.log('Do not update history'); return;
@@ -110,7 +112,10 @@ export default class Toolbar extends React.Component {
         if (soup.find('Entity', {id: key}) !== undefined) {
           if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
           if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
-          ref.set(soup.prettify()).then(() => console.log('Save success'));
+          ref.set(soup.prettify()).then(() => {
+            console.log('Save success');
+            process.exit(0);
+          });
         } else {
           console.log('test version');
         }
@@ -169,3 +174,5 @@ export default class Toolbar extends React.Component {
     );
   }
 }
+
+export default withRouter(Toolbar);

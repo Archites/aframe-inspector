@@ -21,7 +21,7 @@ jobs:
             - ./node_modules
       - run:
           name: Run firebase script
-          command: node .circleci/firebase-script.js 
+          command: node .circleci/firebase-script.js $FIREBASE_API_KEY $FIREBASE_AUTH $FIREBASE_DATABASE $FIREBASE_PROJECT $FIREBASE_STORAGE $FIREBASE_MESSAGE
 workflows:
   version: 2
   upload:
