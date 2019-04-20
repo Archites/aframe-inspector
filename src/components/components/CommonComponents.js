@@ -56,7 +56,7 @@ export default class CommonComponents extends React.Component {
   };
   state = {
     furniture: {},
-    selectedOption: 'Select an option',
+    selectedOption: 'Select furniture',
     isShow: false
   }
 

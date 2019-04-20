@@ -66530,7 +66530,9 @@ var AddComponent = function (_React$Component) {
     value: function getComponentsOptions() {
       var usedComponents = Object.keys(this.props.entity.components);
       var commonOptions = Object.keys(AFRAME.components).filter(function (componentName) {
-        return AFRAME.components[componentName].multiple || usedComponents.indexOf(componentName) === -1;
+        if (componentName === 'closet' || componentName === 'door' || componentName === 'io3d-floor' || componentName === 'kitchen' || componentName === 'wall' || componentName === 'window' || componentName === 'light') {
+          return AFRAME.components[componentName].multiple || usedComponents.indexOf(componentName) === -1;
+        }
       }).sort().map(function (value) {
         return { value: value, label: value, origin: 'loaded' };
       });
@@ -66723,7 +66725,7 @@ var CommonComponents = function (_React$Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CommonComponents.__proto__ || Object.getPrototypeOf(CommonComponents)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       furniture: {},
-      selectedOption: 'Select an option',
+      selectedOption: 'Select furniture',
       isShow: false
     }, _this.renderFurnitureImage = function () {
       var furnitureData = _furniture2.default[_this.state.selectedOption.value];

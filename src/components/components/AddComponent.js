@@ -42,16 +42,21 @@ export default class AddComponent extends React.Component {
     const usedComponents = Object.keys(this.props.entity.components);
     var commonOptions = Object.keys(AFRAME.components)
       .filter(function(componentName) {
-        return (
-          AFRAME.components[componentName].multiple ||
-          usedComponents.indexOf(componentName) === -1
-        );
+        if (componentName === 'closet' || componentName === 'door' ||
+        componentName === 'io3d-floor' || componentName === 'kitchen' ||
+        componentName === 'wall' || componentName === 'window' ||
+        componentName === 'light') {
+          return (
+            AFRAME.components[componentName].multiple ||
+            usedComponents.indexOf(componentName) === -1
+          );
+        }
       })
       .sort()
       .map(function(value) {
         return { value: value, label: value, origin: 'loaded' };
       });
-
+    
     this.options = commonOptions;
     this.options = this.options.sort(function(a, b) {
       return a.label === b.label ? 0 : a.label < b.label ? -1 : 1;

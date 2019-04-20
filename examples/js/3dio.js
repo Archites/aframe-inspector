@@ -35399,16 +35399,16 @@
 	  AFRAME.registerComponent('io3d-lighting', lightingComponent);
 	  AFRAME.registerComponent('io3d-minimap', minimapComponent);
 	  // architectural tookit
-	  AFRAME.registerComponent('io3d-closet', closetComponent);
+	  AFRAME.registerComponent('closet', closetComponent);
 	  AFRAME.registerComponent('io3d-column', columnComponent);
-	  AFRAME.registerComponent('io3d-door', doorComponent);
-	  AFRAME.registerComponent('io3d-floor', floorComponent);
-	  AFRAME.registerComponent('io3d-kitchen', kitchenComponent);
+	  AFRAME.registerComponent('door', doorComponent);
+	  AFRAME.registerComponent('floor', floorComponent);
+	  AFRAME.registerComponent('kitchen', kitchenComponent);
 	  AFRAME.registerComponent('io3d-polyfloor', polyFloorComponent);
 	  AFRAME.registerComponent('io3d-railing', railingComponent);
 	  AFRAME.registerComponent('io3d-stairs', stairsComponent);
-	  AFRAME.registerComponent('io3d-wall', wallComponent);
-	  AFRAME.registerComponent('io3d-window', windowComponent);
+	  AFRAME.registerComponent('wall', wallComponent);
+	  AFRAME.registerComponent('window', windowComponent);
 	  // check if gblock component has already been registered
 	  if (AFRAME.components.gblock) {
 	    // legacy warning in case gblock has been registered using https://github.com/archilogic-com/aframe-gblock/
