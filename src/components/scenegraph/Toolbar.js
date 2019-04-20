@@ -49,8 +49,6 @@ class Toolbar extends React.Component {
       isPlaying: false
     };
 
-    console.log(this.props);
-
     firebase.initializeApp(firebaseConfig);
   }
 
@@ -88,39 +86,41 @@ class Toolbar extends React.Component {
     // const ref = firebase.database().ref(window.location.pathname.replace(/\//g, ''));
     // eslint-disable-next-line react/prop-types
     const { location } = this.props;
-    const ref = firebase.database()
-      .ref(location.state.uId)
-      .child('room')
-      .child(location.state.roomId)
-      .child('element');
+    // const ref = firebase.database()
+    //   .ref(location.state.uId)
+    //   .child('room')
+    //   .child(location.state.roomId)
+    //   .child('element');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
+    var childrenEntity = AFRAME.INSPECTOR.scene.children;
 
     console.log(historyUpdate);
+    console.log(childrenEntity);
 
     if (Object.keys(historyUpdate).length === 0) {
       console.log('Do not update history'); return;
     }
 
-    ref.on('value', function (snapshot) {
-      if (!snapshot.exists()) {
-        console.log('Firebase has not references database'); return;
-      }
-      const htmlTag = snapshot.val();
-      let soup = new JSSoup(htmlTag);
+    // ref.on('value', function (snapshot) {
+    //   if (!snapshot.exists()) {
+    //     console.log('Firebase has not references database'); return;
+    //   }
+    //   const htmlTag = snapshot.val();
+    //   let soup = new JSSoup(htmlTag);
 
-      Object.keys(historyUpdate).forEach(key => {
-        if (soup.find('Entity', {id: key}) !== undefined) {
-          if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
-          if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
-          ref.set(soup.prettify()).then(() => {
-            console.log('Save success');
-            process.exit(0);
-          });
-        } else {
-          console.log('test version');
-        }
-      });
-    });
+    //   Object.keys(historyUpdate).forEach(key => {
+    //     if (soup.find('Entity', {id: key}) !== undefined) {
+    //       if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
+    //       if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
+    //       ref.set(soup.prettify()).then(() => {
+    //         console.log('Save success');
+    //         process.exit(0);
+    //       });
+    //     } else {
+    //       console.log('test version');
+    //     }
+    //   });
+    // });
   };
 
   toggleScenePlaying = () => {
