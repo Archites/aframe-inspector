@@ -16119,7 +16119,8 @@ var InputWidget = function (_React$Component) {
         type: 'text',
         className: 'string',
         value: this.state.value || '',
-        onChange: this.onChange
+        onChange: this.onChange,
+        disabled: true
       });
     }
   }]);
@@ -16808,7 +16809,7 @@ exports.default = Vec4Widget;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = ['box', 'floor', 'bed', 'chair', 'sofa'];
+exports.default = ['box', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa'];
 
 /***/ }),
 /* 108 */
@@ -66480,6 +66481,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var DELIMITER = ' ';
 
+function changeId(componentName, value) {
+  var entity = AFRAME.INSPECTOR.selectedEntity;
+  if (entity.id !== value) {
+    entity.id = value;
+    _Events2.default.emit('entityidchange', entity);
+  }
+}
+
 var AddComponent = function (_React$Component) {
   _inherits(AddComponent, _React$Component);
 
@@ -66497,15 +66506,32 @@ var AddComponent = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AddComponent.__proto__ || Object.getPrototypeOf(AddComponent)).call.apply(_ref, [this].concat(args))), _this), _this.addComponent = function (value) {
       var componentName = value.value;
 
+      var id = 1;
       var entity = _this.props.entity;
+      var childrenEntity = AFRAME.INSPECTOR.scene.children;
+      childrenEntity.map(function (item) {
+        if (item.el !== undefined && item.el.id !== undefined) {
+          console.log('Sub', item.el.id.substring(0, item.el.id.length - 1));
+          if (item.el.id.substring(0, item.el.id.length - 1) === componentName) {
+            id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+            id++;
+            console.log('ID', id);
+          }
+          console.log('Item', item.el.id);
+        }
+      });
+      console.log(entity.id);
+      if (entity.id.substring(0, entity.id.length - 1) !== componentName) {
+        changeId(entity, componentName + id);
+      }
       var packageName;
       var selectedOption = _this.options.filter(function (option) {
         return option.value === componentName;
       })[0];
 
       if (AFRAME.components[componentName].multiple) {
-        var id = prompt('Provide an ID for this component (e.g., \'foo\' for ' + componentName + '__foo).');
-        componentName = id ? componentName + '__' + id : componentName;
+        var _id = prompt('Provide an ID for this component (e.g., \'foo\' for ' + componentName + '__foo).');
+        componentName = _id ? componentName + '__' + _id : componentName;
       }
 
       entity.setAttribute(componentName, '');
@@ -66530,7 +66556,7 @@ var AddComponent = function (_React$Component) {
     value: function getComponentsOptions() {
       var usedComponents = Object.keys(this.props.entity.components);
       var commonOptions = Object.keys(AFRAME.components).filter(function (componentName) {
-        if (componentName === 'closet' || componentName === 'door' || componentName === 'io3d-floor' || componentName === 'kitchen' || componentName === 'wall' || componentName === 'window' || componentName === 'light') {
+        if (componentName === 'closet' || componentName === 'door' || componentName === 'floor' || componentName === 'kitchen' || componentName === 'wall' || componentName === 'window') {
           return AFRAME.components[componentName].multiple || usedComponents.indexOf(componentName) === -1;
         }
       }).sort().map(function (value) {
@@ -66752,8 +66778,20 @@ var CommonComponents = function (_React$Component) {
       };
       var componentName = value.value;
 
+      var id = 1;
       var entity = _this.props.entity;
-      changeId(entity, type);
+      var childrenEntity = AFRAME.INSPECTOR.scene.children;
+      childrenEntity.map(function (item) {
+        if (item.el !== undefined && item.el.id !== undefined) {
+          if (item.el.id.substring(0, item.el.id.length - 1) === type) {
+            id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+            id++;
+          }
+        }
+      });
+      if (entity.id.substring(0, entity.id.length - 1) !== type) {
+        changeId(entity, type + id);
+      }
       // const newEntity = `<a-entity io3d-furniture="${entityID}"></a-entity>`
       var packageName;
       var selectedOption = _this.options.filter(function (option) {
@@ -66761,8 +66799,8 @@ var CommonComponents = function (_React$Component) {
       })[0];
 
       if (AFRAME.components[componentName].multiple) {
-        var id = prompt('Provide an ID for this component (e.g., \'foo\' for ' + componentName + '__foo).');
-        componentName = id ? componentName + '__' + id : componentName;
+        var _id = prompt('Provide an ID for this component (e.g., \'foo\' for ' + componentName + '__foo).');
+        componentName = _id ? componentName + '__' + _id : componentName;
       }
       entity.setAttribute('io3d-furniture', 'id:' + entityID);
       entity.setAttribute(componentName, '');

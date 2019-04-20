@@ -136,8 +136,20 @@ export default class CommonComponents extends React.Component {
     };
     let componentName = value.value;
 
+    var id = 1;
     var entity = this.props.entity;
-    changeId(entity, type);
+    var childrenEntity = AFRAME.INSPECTOR.scene.children;
+    childrenEntity.map(item => {
+      if (item.el !== undefined && item.el.id !== undefined) {
+        if (item.el.id.substring(0, item.el.id.length - 1) === type) {
+          id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+          id++;
+        }
+      }
+    });
+    if (entity.id.substring(0, entity.id.length - 1) !== type) {
+      changeId(entity, type + id);
+    }
     // const newEntity = `<a-entity io3d-furniture="${entityID}"></a-entity>`
     var packageName;
     var selectedOption = this.options.filter(function(option) {
