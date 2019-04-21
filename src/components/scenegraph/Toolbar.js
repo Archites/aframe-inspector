@@ -95,9 +95,8 @@ class Toolbar extends React.Component {
       if (!snapshot.exists()) {
         console.log('Firebase has not references database'); return;
       }
-      const htmlTag = snapshot.val();
-      let soup = new JSSoup(htmlTag);
-      let tempTag;
+      let htmlTag = snapshot.val();
+      let tempTag = '';
 
       if (Object.keys(historyUpdate).length === 0) {
         while (newOrder.length > 0) {
@@ -117,7 +116,7 @@ class Toolbar extends React.Component {
           });
           newOrder[0].classList.remove('new');
         }
-        ref.set(`${htmlTag}\n${tempTag}`);
+        ref.set(`${htmlTag} \n ${tempTag}`);
       } else {
         while (newOrder.length > 0) {
           tempTag = '<Entity ';
@@ -136,6 +135,8 @@ class Toolbar extends React.Component {
           });
           newOrder[0].classList.remove('new');
         }
+        htmlTag += `\n ${tempTag}`;
+        let soup = new JSSoup(htmlTag);
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
             if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];

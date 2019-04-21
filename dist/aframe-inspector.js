@@ -70772,8 +70772,7 @@ var Toolbar = function (_React$Component) {
           console.log('Firebase has not references database');return;
         }
         var htmlTag = snapshot.val();
-        var soup = new _jssoup2.default(htmlTag);
-        var tempTag = void 0;
+        var tempTag = '';
 
         if (Object.keys(historyUpdate).length === 0) {
           var _loop = function _loop() {
@@ -70797,7 +70796,7 @@ var Toolbar = function (_React$Component) {
           while (newOrder.length > 0) {
             _loop();
           }
-          ref.set(htmlTag + '\n' + tempTag);
+          ref.set(htmlTag + ' \n ' + tempTag);
         } else {
           var _loop2 = function _loop2() {
             tempTag = '<Entity ';
@@ -70820,6 +70819,8 @@ var Toolbar = function (_React$Component) {
           while (newOrder.length > 0) {
             _loop2();
           }
+          htmlTag += '\n ' + tempTag;
+          var soup = new _jssoup2.default(htmlTag);
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
               if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
