@@ -68886,9 +68886,9 @@ var CommonComponents = function (_React$Component) {
         var _id = prompt('Provide an ID for this component (e.g., \'foo\' for ' + componentName + '__foo).');
         componentName = _id ? componentName + '__' + _id : componentName;
       }
+      entity.setAttribute('io3d-furniture', 'id:' + entityID);
       entity.setAttribute('class', 'new');
       entity.setAttribute('key', 'io3d-furniture=id:' + entityID);
-      entity.setAttribute(componentName, '');
       _Events2.default.emit('componentadd', { entity: entity, component: componentName });
       ga('send', 'event', 'Components', 'addComponent', componentName);
     }, _this.handleChange = function (selectedOption) {
@@ -70773,11 +70773,11 @@ var Toolbar = function (_React$Component) {
         }
         var htmlTag = snapshot.val();
         var soup = new _jssoup2.default(htmlTag);
-        var newSoup = void 0;
+        var tempTag = void 0;
 
         if (Object.keys(historyUpdate).length === 0) {
           var _loop = function _loop() {
-            newSoup = new _jssoup2.default('<Entity />');
+            tempTag = '<Entity ';
             var element = newOrder[0];
             Object.keys(element.attributes).forEach(function (key) {
               var attr = element.attributes[key];
@@ -70785,22 +70785,22 @@ var Toolbar = function (_React$Component) {
 
               if (attr.nodeName === 'key') {
                 var value = attr.nodeValue.split('=')[1];
-                newSoup.attrs['io3d-furniture'] = value;
+                tempTag += 'io3d-furniture="' + value + '" ';
               } else if (attr.nodeName !== 'class') {
-                newSoup.attrs[attr.nodeName] = attr.nodeValue;
+                tempTag += attr.nodeName + '="' + attr.nodeValue + '" ';
               }
+              tempTag += '/>';
             });
             newOrder[0].classList.remove('new');
-            soup.append(newSoup);
           };
 
           while (newOrder.length > 0) {
             _loop();
           }
-          ref.set(soup.prettify());
+          ref.set(htmlTag + '\n' + tempTag);
         } else {
           var _loop2 = function _loop2() {
-            var newSoup = new _jssoup2.default('<Entity />');
+            tempTag = '<Entity ';
             var element = newOrder[0];
             Object.keys(element.attributes).forEach(function (key) {
               var attr = element.attributes[key];
@@ -70808,13 +70808,13 @@ var Toolbar = function (_React$Component) {
 
               if (attr.nodeName === 'key') {
                 var value = attr.nodeValue.split('=')[1];
-                newSoup.attrs['io3d-furniture'] = value;
+                tempTag += 'io3d-furniture="' + value + '" ';
               } else if (attr.nodeName !== 'class') {
-                newSoup.attrs[attr.nodeName] = attr.nodeValue;
+                tempTag += attr.nodeName + '="' + attr.nodeValue + '" ';
               }
+              tempTag += '/>';
             });
             newOrder[0].classList.remove('new');
-            soup.append(newSoup);
           };
 
           while (newOrder.length > 0) {

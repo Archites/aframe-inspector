@@ -97,44 +97,44 @@ class Toolbar extends React.Component {
       }
       const htmlTag = snapshot.val();
       let soup = new JSSoup(htmlTag);
-      let newSoup;
+      let tempTag;
 
       if (Object.keys(historyUpdate).length === 0) {
         while (newOrder.length > 0) {
-          newSoup = new JSSoup('<Entity />');
-          const element = newOrder[0];
-          Object.keys(element.attributes).forEach(key => {
-            const attr = element.attributes[key];
+          tempTag = '<Entity ';
+          let element = newOrder[0];
+          Object.keys(element.attributes).forEach(function (key) {
+            var attr = element.attributes[key];
             if (attr.nodeName === 'io3d-furniture') return;
 
             if (attr.nodeName === 'key') {
-              const value = attr.nodeValue.split('=')[1];
-              newSoup.attrs['io3d-furniture'] = value;
+              let value = attr.nodeValue.split('=')[1];
+              tempTag += `io3d-furniture="${value}" `;
             } else if (attr.nodeName !== 'class') {
-              newSoup.attrs[attr.nodeName] = attr.nodeValue;
+              tempTag += `${attr.nodeName}="${attr.nodeValue}" `;
             }
+            tempTag += '/>';
           });
           newOrder[0].classList.remove('new');
-          soup.append(newSoup);
         }
-        ref.set(soup.prettify());
+        ref.set(`${htmlTag}\n${tempTag}`);
       } else {
         while (newOrder.length > 0) {
-          let newSoup = new JSSoup('<Entity />');
-          const element = newOrder[0];
-          Object.keys(element.attributes).forEach(key => {
-            const attr = element.attributes[key];
+          tempTag = '<Entity ';
+          let element = newOrder[0];
+          Object.keys(element.attributes).forEach(function (key) {
+            var attr = element.attributes[key];
             if (attr.nodeName === 'io3d-furniture') return;
 
             if (attr.nodeName === 'key') {
-              const value = attr.nodeValue.split('=')[1];
-              newSoup.attrs['io3d-furniture'] = value;
+              let value = attr.nodeValue.split('=')[1];
+              tempTag += `io3d-furniture="${value}" `;
             } else if (attr.nodeName !== 'class') {
-              newSoup.attrs[attr.nodeName] = attr.nodeValue;
+              tempTag += `${attr.nodeName}="${attr.nodeValue}" `;
             }
+            tempTag += '/>';
           });
           newOrder[0].classList.remove('new');
-          soup.append(newSoup);
         }
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
