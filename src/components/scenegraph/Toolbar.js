@@ -49,8 +49,6 @@ class Toolbar extends React.Component {
       isPlaying: false
     };
 
-    console.log(this.props);
-
     firebase.initializeApp(firebaseConfig);
   }
 
@@ -78,14 +76,6 @@ class Toolbar extends React.Component {
    * Try to write changes with aframe-inspector-watcher.
    */
   writeChanges = () => {
-    // const xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'http://localhost:51234/save');
-    // xhr.onerror = () => {
-    //   alert('aframe-watcher not running. This feature requires a companion service running locally. npm install aframe-watcher to save changes back to file. Read more at supermedium.com/aframe-watcher');
-    // };
-    // xhr.setRequestHeader('Content-Type', 'application/json');
-    // xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
-    // const ref = firebase.database().ref(window.location.pathname.replace(/\//g, ''));
     // eslint-disable-next-line react/prop-types
     const { location } = this.props;
     const ref = firebase.database()
@@ -95,9 +85,9 @@ class Toolbar extends React.Component {
       .child('element');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 
-    console.log(historyUpdate);
+    let newOrder = document.getElementsByClassName('new');
 
-    if (Object.keys(historyUpdate).length === 0) {
+    if (Object.keys(historyUpdate).length === 0 && newOrder.length === 0) {
       console.log('Do not update history'); return;
     }
 
@@ -108,18 +98,47 @@ class Toolbar extends React.Component {
       const htmlTag = snapshot.val();
       let soup = new JSSoup(htmlTag);
 
-      Object.keys(historyUpdate).forEach(key => {
-        if (soup.find('Entity', {id: key}) !== undefined) {
-          if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
-          if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
-          ref.set(soup.prettify()).then(() => {
-            console.log('Save success');
-            process.exit(0);
+      if (Object.keys(historyUpdate).length === 0) {
+        while (newOrder.length > 0) {
+          let newSoup = new JSSoup('<Entity />');
+          const element = newOrder[0];
+          Object.keys(element.attributes).forEach(key => {
+            const attr = element.attributes[key];
+            if (attr.nodeName !== 'class') {
+              newSoup.attrs[attr.nodeName] = attr.nodeValue;
+            }
           });
-        } else {
-          console.log('test version');
+          newOrder[0].classList.remove('new');
+          soup.append(newSoup);
         }
-      });
+        ref.set(soup.prettify()).then(() => {
+          console.log('Save success');
+          process.exit(0);
+        });
+      } else {
+        while (newOrder.length > 0) {
+          let newSoup = new JSSoup('<Entity />');
+          const element = newOrder[0];
+          Object.keys(element.attributes).forEach(key => {
+            const attr = element.attributes[key];
+            if (attr.nodeName !== 'class') {
+              newSoup.attrs[attr.nodeName] = attr.nodeValue;
+            }
+          });
+          newOrder[0].classList.remove('new');
+          soup.append(newSoup);
+        }
+        Object.keys(historyUpdate).forEach(key => {
+          if (soup.find('Entity', {id: key}) !== undefined) {
+            if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
+            if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
+          }
+        });
+        ref.set(soup.prettify()).then(() => {
+          console.log('Save success');
+          process.exit(0);
+        });
+      }
     });
   };
 

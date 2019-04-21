@@ -28,6 +28,7 @@ export default class AddComponent extends React.Component {
     var id = 1;
     var entity = this.props.entity;
     var childrenEntity = AFRAME.INSPECTOR.scene.children;
+
     childrenEntity.map(item => {
       if (item.el !== undefined && item.el.id !== undefined) {
         console.log('Sub', item.el.id.substring(0, item.el.id.length - 1));
