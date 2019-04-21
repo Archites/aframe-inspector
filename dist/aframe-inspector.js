@@ -16915,7 +16915,7 @@ exports.default = Vec4Widget;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = ['box', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa', 'table', 'small_lamp', 'lamp', 'picture', 'shelf', 'shoes', 'plant', 'books', 'other'];
+exports.default = ['box', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa', 'wardrobe', 'table', 'computer', 'small_lamp', 'lamp', 'picture', 'shelf', 'shoes', 'plant', 'books', 'other'];
 
 /***/ }),
 /* 113 */
