@@ -79,9 +79,9 @@ class Toolbar extends React.Component {
     // eslint-disable-next-line react/prop-types
     const { location } = this.props;
     const ref = firebase.database()
-      .ref('aFtWGTSvUqfby59Kdzm8vBnNPCj1')
+      .ref(location.state.uId)
       .child('room')
-      .child('-LcpS6IUlsDqO6brwR8a')
+      .child(location.state.roomId)
       .child('element');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 

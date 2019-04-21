@@ -70758,7 +70758,7 @@ var Toolbar = function (_React$Component) {
       // eslint-disable-next-line react/prop-types
       var location = _this.props.location;
 
-      var ref = _firebase2.default.database().ref('aFtWGTSvUqfby59Kdzm8vBnNPCj1').child('room').child('-LcpS6IUlsDqO6brwR8a').child('element');
+      var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
       var newOrder = document.getElementsByClassName('new');
