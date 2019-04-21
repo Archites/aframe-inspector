@@ -79,13 +79,13 @@ class Toolbar extends React.Component {
     // eslint-disable-next-line react/prop-types
     const { location } = this.props;
     const ref = firebase.database()
-      .ref(location.state.uId)
+      .ref('aFtWGTSvUqfby59Kdzm8vBnNPCj1')
       .child('room')
-      .child(location.state.roomId)
+      .child('-LcpS6IUlsDqO6brwR8a')
       .child('element');
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 
-    let newOrder = document.getElementsByClassName('new');
+    var newOrder = document.getElementsByClassName('new');
 
     if (Object.keys(historyUpdate).length === 0 && newOrder.length === 0) {
       console.log('Do not update history'); return;
@@ -95,8 +95,9 @@ class Toolbar extends React.Component {
       if (!snapshot.exists()) {
         console.log('Firebase has not references database'); return;
       }
-      let htmlTag = snapshot.val();
-      let tempTag = '';
+      var htmlTag = snapshot.val();
+      var soup = new JSSoup(htmlTag);
+      var tempTag = '';
 
       if (Object.keys(historyUpdate).length === 0) {
         while (newOrder.length > 0) {
@@ -112,11 +113,11 @@ class Toolbar extends React.Component {
             } else if (attr.nodeName !== 'class') {
               tempTag += `${attr.nodeName}="${attr.nodeValue}" `;
             }
-            tempTag += '/>';
           });
+          tempTag += '></Entity>';
           newOrder[0].classList.remove('new');
         }
-        ref.set(`${htmlTag} \n ${tempTag}`);
+        ref.set(soup.prettify() + tempTag);
       } else {
         while (newOrder.length > 0) {
           tempTag = '<Entity ';
@@ -131,12 +132,12 @@ class Toolbar extends React.Component {
             } else if (attr.nodeName !== 'class') {
               tempTag += `${attr.nodeName}="${attr.nodeValue}" `;
             }
-            tempTag += '/>';
           });
+          tempTag += '></Entity>';
           newOrder[0].classList.remove('new');
         }
-        htmlTag += `\n ${tempTag}`;
-        let soup = new JSSoup(htmlTag);
+        htmlTag = soup.prettify() + tempTag;
+        soup = new JSSoup(htmlTag);
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
             if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
