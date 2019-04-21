@@ -104,24 +104,29 @@ class Toolbar extends React.Component {
           const element = newOrder[0];
           Object.keys(element.attributes).forEach(key => {
             const attr = element.attributes[key];
-            if (attr.nodeName !== 'class') {
+            if (attr.nodeName === 'key') {
+              const key = attr.nodeValue.split('=')[0];
+              const value = attr.nodeValue.split('=')[1];
+              newSoup.attrs[key] = value;
+            } else if (attr.nodeName !== 'class') {
               newSoup.attrs[attr.nodeName] = attr.nodeValue;
             }
           });
           newOrder[0].classList.remove('new');
           soup.append(newSoup);
         }
-        ref.set(soup.prettify()).then(() => {
-          console.log('Save success');
-          process.exit(0);
-        });
+        ref.set(soup.prettify());
       } else {
         while (newOrder.length > 0) {
           let newSoup = new JSSoup('<Entity />');
           const element = newOrder[0];
           Object.keys(element.attributes).forEach(key => {
             const attr = element.attributes[key];
-            if (attr.nodeName !== 'class') {
+            if (attr.nodeName === 'key') {
+              const key = attr.nodeValue.split('=')[0];
+              const value = attr.nodeValue.split('=')[1];
+              newSoup.attrs[key] = value;
+            } else if (attr.nodeName !== 'class') {
               newSoup.attrs[attr.nodeName] = attr.nodeValue;
             }
           });
@@ -134,10 +139,7 @@ class Toolbar extends React.Component {
             if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
           }
         });
-        ref.set(soup.prettify()).then(() => {
-          console.log('Save success');
-          process.exit(0);
-        });
+        ref.set(soup.prettify());
       }
     });
   };
