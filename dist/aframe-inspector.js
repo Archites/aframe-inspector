@@ -70797,7 +70797,9 @@ var Toolbar = function (_React$Component) {
           while (newOrder.length > 0) {
             _loop();
           }
-          ref.set(soup.prettify() + tempTag);
+          ref.set(soup.prettify() + tempTag).then(function () {
+            return alert('Save successful!');
+          });
         } else {
           var _loop2 = function _loop2() {
             tempTag = '<Entity ';
@@ -70828,7 +70830,9 @@ var Toolbar = function (_React$Component) {
               if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
             }
           });
-          ref.set(soup.prettify());
+          ref.set(soup.prettify()).then(function () {
+            return alert('Save successful!');
+          });
         }
       });
     };

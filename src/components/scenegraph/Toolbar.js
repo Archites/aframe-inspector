@@ -117,7 +117,7 @@ class Toolbar extends React.Component {
           tempTag += '></Entity>';
           newOrder[0].classList.remove('new');
         }
-        ref.set(soup.prettify() + tempTag);
+        ref.set(soup.prettify() + tempTag).then(() => alert('Save successful!'));
       } else {
         while (newOrder.length > 0) {
           tempTag = '<Entity ';
@@ -144,7 +144,7 @@ class Toolbar extends React.Component {
             if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
           }
         });
-        ref.set(soup.prettify());
+        ref.set(soup.prettify()).then(() => alert('Save successful!'));
       }
     });
   };
