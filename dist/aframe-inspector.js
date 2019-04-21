@@ -16915,7 +16915,7 @@ exports.default = Vec4Widget;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = ['box', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa'];
+exports.default = ['box', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa', 'table', 'small_lamp', 'lamp', 'picture', 'shelf', 'shoes', 'plant', 'books', 'other'];
 
 /***/ }),
 /* 113 */
@@ -68798,6 +68798,39 @@ var options = [{
 }, {
   value: 'sofa',
   label: 'Sofa'
+}, {
+  value: 'table',
+  label: 'Table'
+}, {
+  value: 'wardrobe',
+  label: 'Wardrobe'
+}, {
+  value: 'computer',
+  label: 'Computer'
+}, {
+  value: 'small_lamp',
+  label: 'Small Lamp'
+}, {
+  value: 'lamp',
+  label: 'Lamp'
+}, {
+  value: 'picture',
+  label: 'Picture'
+}, {
+  value: 'shelf',
+  label: 'Shelf'
+}, {
+  value: 'shoes',
+  label: 'Shoes'
+}, {
+  value: 'plant',
+  label: 'Plant'
+}, {
+  value: 'books',
+  label: 'Books'
+}, {
+  value: 'other',
+  label: 'Other'
 }];
 
 var furImageDiv = {
@@ -68806,7 +68839,9 @@ var furImageDiv = {
 };
 
 var furImageSize = {
-  width: '100%'
+  width: '100%',
+  'object-fit': 'contain',
+  height: '150px'
 };
 
 // @todo Take this out and use updateEntity?
@@ -68850,6 +68885,11 @@ var CommonComponents = function (_React$Component) {
             { key: index, onClick: function onClick() {
                 return _this.addComponent(item.furniture_id, _this.state.selectedOption.value);
               }, style: furImageDiv },
+            _react2.default.createElement(
+              'div',
+              null,
+              item.name
+            ),
             _react2.default.createElement('img', { src: item.url, style: furImageSize })
           );
         })
@@ -69014,13 +69054,8 @@ var CommonComponents = function (_React$Component) {
       );
 
       return _react2.default.createElement(
-        _Collapsible2.default,
+        'div',
         { id: 'componentEntityHeader', className: 'commonComponents' },
-        _react2.default.createElement(
-          'div',
-          { className: 'collapsible-header' },
-          (0, _entity.printEntity)(entity)
-        ),
         _react2.default.createElement(
           'div',
           { className: 'collapsible-content' },
@@ -72443,48 +72478,48 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
           if (scope.axis.search('Y') === -1) point.y = 0;
           if (scope.axis.search('Z') === -1) point.z = 0;
 
-          if (point.x > 0) {
-            point.x = Math.round(point.x * 2) / 2;
-            var tempCal = point.x % 0.5;
-            if (tempCal > 0) {
-              point.x += 0.5;
-            }
-          }
-          if (point.x < 0) {
-            point.x = Math.round(point.x * 2) / 2;
-            var _tempCal = point.x % 0.5;
-            if (_tempCal > 0) {
-              point.x -= 0.5;
-            }
-          }
-          if (point.y > 0) {
-            point.y = Math.round(point.y * 2) / 2;
-            var _tempCal2 = point.y % 0.5;
-            if (_tempCal2 > 0) {
-              point.y += 0.5;
-            }
-          }
-          if (point.y < 0) {
-            point.y = Math.round(point.y * 2) / 2;
-            var _tempCal3 = point.y % 0.5;
-            if (_tempCal3 > 0) {
-              point.y -= 0.5;
-            }
-          }
-          if (point.z > 0) {
-            point.z = Math.round(point.z * 2) / 2;
-            var _tempCal4 = point.z % 0.5;
-            if (_tempCal4 > 0) {
-              point.z += 0.5;
-            }
-          }
-          if (point.z < 0) {
-            point.z = Math.round(point.z * 2) / 2;
-            var _tempCal5 = point.z % 0.5;
-            if (_tempCal5 > 0) {
-              point.z -= 0.5;
-            }
-          }
+          // if (point.x > 0) {
+          //   point.x = Math.round(point.x * 2) / 2;
+          //   const tempCal = point.x % 0.5;
+          //   if (tempCal > 0) {
+          //     point.x += 0.5;
+          //   }
+          // }
+          // if (point.x < 0) {
+          //   point.x = Math.round(point.x * 2) / 2;
+          //   const tempCal = point.x % 0.5;
+          //   if (tempCal > 0) {
+          //     point.x -= 0.5;
+          //   }
+          // }
+          // if (point.y > 0) {
+          //   point.y = Math.round(point.y * 2) / 2;
+          //   const tempCal = point.y % 0.5;
+          //   if (tempCal > 0) {
+          //     point.y += 0.5;
+          //   }
+          // }
+          // if (point.y < 0) {
+          //   point.y = Math.round(point.y * 2) / 2;
+          //   const tempCal = point.y % 0.5;
+          //   if (tempCal > 0) {
+          //     point.y -= 0.5;
+          //   }
+          // }
+          // if (point.z > 0) {
+          //   point.z = Math.round(point.z * 2) / 2;
+          //   const tempCal = point.z % 0.5;
+          //   if (tempCal > 0) {
+          //     point.z += 0.5;
+          //   }
+          // }
+          // if (point.z < 0) {
+          //   point.z = Math.round(point.z * 2) / 2;
+          //   const tempCal = point.z % 0.5;
+          //   if (tempCal > 0) {
+          //     point.z -= 0.5;
+          //   }
+          // }
 
           point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
@@ -93886,7 +93921,7 @@ if (!self.fetch) {
 /* 378 */
 /***/ (function(module, exports) {
 
-module.exports = {"bed":[{"name":"Brick Bed","furniture_id":"2d439ea3-b080-4f77-a61f-ecded5e9ef95","manufacturer":"Gervasoni","url":"https://storage.3d.io/archilogic/interior/gervasoni/bedroom/BrickBed/info/3d.png"},{"name":"Afrodite Bed","furniture_id":"a10956ab-e79a-4c4e-a91b-ffdf955a53fe","manufacturer":"B&B Italia","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-06_12-10-31_BkoXQw/snapshot.png"}],"chair":[{"name":"C2 Chair","furniture_id":"edd99bfc-a597-4fb4-bf92-04916e6d5dfc","manufacturer":"ODESD2","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-02-06_11-47-35_DMK52u/3d.png"},{"name":"Panton Chair","furniture_id":"c81f93d1-647d-4150-b73c-332002241731","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/chairs/Panton-Chair/info/3d.png"}],"sofa":[{"name":"Place Sofa","furniture_id":"87ee8ba3-c4c6-4fe6-b2c3-1361a8f9f470","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-12-22_18-12-40_MTctA1/snapshot.png"},{"name":"Mex","furniture_id":"2b849f61-a401-40c4-802b-038fcaa60880","manufacturer":"Cassina","url":"https://storage.3d.io/archilogic/interior/cassina/relaxing/MexCube/info/3d.png"}]}
+module.exports = {"bed":[{"name":"Brick Bed","furniture_id":"2d439ea3-b080-4f77-a61f-ecded5e9ef95","manufacturer":"Gervasoni","url":"https://storage.3d.io/archilogic/interior/gervasoni/bedroom/BrickBed/info/3d.png"},{"name":"Afrodite Bed","furniture_id":"a10956ab-e79a-4c4e-a91b-ffdf955a53fe","manufacturer":"B&B Italia","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-06_12-10-31_BkoXQw/snapshot.png"},{"name":"Husk Bed","furniture_id":"83f8511e-3745-4e09-b086-dd0a6f52b376","manufacturer":"B&B Italia","url":"https://storage.3d.io/archilogic/interior/B&BItalia/bedroom/HuskBed/info/3d.png"},{"name":"Bolton Bed","furniture_id":"bf7b6199-6105-487a-bd75-291ed037639d","manufacturer":"Poliform","url":"https://storage.3d.io/archilogic/interior/poliform/bedroom/Bolton_Bed_01/info/3d.png"},{"name":"Elena","furniture_id":"dc5c98b5-d216-41bc-8e26-e560f63b169e","manufacturer":"Bontempi","url":"https://storage.3d.io/archilogic/interior/Bontempi/bedroom/Elena/info/3d.png"},{"name":"Tonight Single","furniture_id":"5440324c-bc19-47d4-a6b5-f386b5064972","manufacturer":"Bonaldo","url":"https://storage.3d.io/archilogic/interior/Bonaldo/bedroom/TonightSingle/info/3d.png"},{"name":"Alcova Bed '09","furniture_id":"07fa4cb7-54ef-4a2a-8e69-9e16cf585025","manufacturer":"B&B Italia","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-16_10-54-55_7TwzJC/icon.png"},{"name":"Tatlin Cover","furniture_id":"05203408-badc-4aa7-b7d3-ecea83ee3f50","manufacturer":"Minotti","url":"https://storage.3d.io/archilogic/interior/minotti/bedroom/Tatlin/info/3d.png"},{"name":"Wish","furniture_id":"9fc729a4-892d-42fd-b719-d497ffd36086","manufacturer":"Molteni & C","url":"https://storage.3d.io/archilogic/interior/Molteni/bedroom/Wish/info/3d.png"},{"name":"Alcova","furniture_id":"6639972f-aa22-4f62-9280-ffd264ad2395","manufacturer":"B&B Italia","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-10_12-46-13_YnTTkL/snapshot.png"}],"chair":[{"name":"C2 Chair","furniture_id":"edd99bfc-a597-4fb4-bf92-04916e6d5dfc","manufacturer":"ODESD2","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-02-06_11-47-35_DMK52u/3d.png"},{"name":"Panton Chair","furniture_id":"c81f93d1-647d-4150-b73c-332002241731","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/chairs/Panton-Chair/info/3d.png"},{"name":"Hyde Leather Club Chair","furniture_id":"e0201dc0-0029-4216-8ca2-18f289469d44","manufacturer":"Restoration Hardware","url":"https://storage.3d.io/archilogic/interior/RestorationHardware/seating/Hyde_Leather_Club_Chair/info/3d.png"},{"name":"Lotus","furniture_id":"b3909c0e-cc8e-4871-a642-fd96191754dc","manufacturer":"Horgenglarus","url":"https://storage.3d.io/archilogic/interior/Horgenglarus/seating/Lotus/info/3d.png"},{"name":"Pacific Chair Low Back","furniture_id":"204e1740-6575-4c4a-960b-67cea2cb8f63","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-04-16_08-38-07_16iJmu/snapshot.png"},{"name":"Classic 1-383","furniture_id":"440b02bc-24f2-4b75-94cf-35bb033a1372","manufacturer":"Horgenglarus","url":"https://storage.3d.io/archilogic/interior/Horgenglarus/seating/Classic1-383/info/3d.png"},{"name":"Riale","furniture_id":"95a42752-0ae8-4c6f-93b0-174bd72bedc8","manufacturer":"Willisau","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-25_14-39-14_r5lkmu/3d.png"},{"name":"AAC 42 Fixed Seat Cushion","furniture_id":"960301a0-ec44-41fc-9b6d-de95c5cb60d9","manufacturer":"HAY","url":"https://storage.3d.io/3c09806d-3207-4ba0-a466-f0d87ff0729a/2018-03-27_10-01-46_ed5NpY/snapshot.png"},{"name":"AAC 42 Upholstery","furniture_id":"61353294-8053-4b86-a52e-e2735f1ad9d2","manufacturer":"HAY","url":"https://storage.3d.io/3c09806d-3207-4ba0-a466-f0d87ff0729a/2018-03-27_09-39-50_Y91ASz/snapshot.png"},{"name":"ID Trim","furniture_id":"35fa5b72-b2c2-47bc-ae65-5ea4abf6b17b","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/seating/IDTrim/info/3d.png"},{"name":"Yuki | 857 (E&Y Co-Edition)","furniture_id":"d3e5cc8d-f8cb-43f0-beca-e81dba124b89","manufacturer":"Zanotta","url":"https://storage.3d.io/archilogic/interior/zanotta/relaxing/yuki/info/3d.png"},{"name":"Massaud Lounge Chair","furniture_id":"38d3cdb4-5eea-4b67-b488-ab5652660a2c","manufacturer":"Steelcase / Coalesse","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-04-04_13-29-36_UK0AkA/snapshot.png"},{"name":"Kiki Lounge Chair","furniture_id":"4c05ed36-fc42-4b73-a340-b9b1f2f237f2","manufacturer":"Artek","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-03-07_08-42-22_VzzEGs/snapshot.png"},{"name":"Q1 Lounge Chair","furniture_id":"4c49aa5b-9b7b-4d3d-a2d2-60663e712b0e","manufacturer":"ODESD2","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-02-06_12-58-14_wr4pCK/3d_2.png"}],"sofa":[{"name":"Place Sofa","furniture_id":"87ee8ba3-c4c6-4fe6-b2c3-1361a8f9f470","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-12-22_18-12-40_MTctA1/snapshot.png"},{"name":"Mex","furniture_id":"2b849f61-a401-40c4-802b-038fcaa60880","manufacturer":"Cassina","url":"https://storage.3d.io/archilogic/interior/cassina/relaxing/MexCube/info/3d.png"},{"name":"Soft Modular Sofa 2 Modules","furniture_id":"f5c7d2bd-f292-417b-8471-3e05b989d275","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-04-16_09-25-41_OD0k29/snapshot.png"},{"name":"Freeman Sofa System","furniture_id":"79ffe149-df05-41c3-888a-24f9b785f1a8","manufacturer":"Meridiani","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-11_12-57-29_K5uu7Y/snapshot.png"},{"name":"Savoy Sofa","furniture_id":"be426683-c2f6-4058-939e-3c3b2ee6bc4a","manufacturer":"Restoration Hardware","url":"https://storage.3d.io/archilogic/interior/RestorationHardware/relaxing/6_SavoySofa/info/3d.png"},{"name":"Suita Sofa Three Seater Rolls","furniture_id":"fbc5b965-969d-4d74-b731-84ae4f0ca042","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/sofas/Suita-Sofa-Three-Seater-Rolls/info/3d.png"},{"name":"Hamilton Islands","furniture_id":"fa56f1c5-bfce-4181-b310-c0ab12212d31","manufacturer":"Minotti","url":"https://storage.3d.io/archilogic/interior/minotti/relaxing/Hamilton_Islands/info/3d.png"},{"name":"Lifewood","furniture_id":"6070873f-1415-4846-ae40-95f3a4e49ff5","manufacturer":"Flexform","url":"https://storage.3d.io/archilogic/interior/flexform/relaxing/Lifewood/info/3d.png"},{"name":"Groundpiece","furniture_id":"0b93fbbb-7406-4d54-8310-a8f53b4e2f82","manufacturer":"Flexform","url":"https://storage.3d.io/archilogic/interior/flexform/relaxing/Groundpiece/info/3d.png"},{"name":"Bandy","furniture_id":"c7fd285e-8dfa-4920-aaf3-7c0b156796d9","manufacturer":"Bonaldo","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-09-11_22-25-53_mWb1Yx/snapshot.png"},{"name":"Moon System","furniture_id":"6efa831b-0bcf-4304-82a2-662e8ca4fdf7","manufacturer":"B&B Italia","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-17_11-35-28_qftDyL/Icon.png"},{"name":"Softdream","furniture_id":"4987d627-43cd-4984-9ebb-672601c79d38","manufacturer":"Flexform","url":"https://storage.3d.io/archilogic/interior/flexform/relaxing/SoftDream/info/3d.png"},{"name":"Bjørn 3 Seater","furniture_id":"1cd4ee17-46ba-47d7-bf82-b0fb81b3cd3c","manufacturer":"HAY","url":"https://storage.3d.io/3c09806d-3207-4ba0-a466-f0d87ff0729a/2018-02-19_09-33-33_aXKneh/snapshot.png"},{"name":"Boutique Leather","furniture_id":"271a2ede-0d5e-4cb4-a90e-c0784898ecb6","manufacturer":"Moooi","url":"https://storage.3d.io/archilogic/interior/moooi/relaxing/Boutique_Leather/info/3d.png"},{"name":"Lifesteel Sofa","furniture_id":"2438b6da-4e9c-499a-b4a3-32c28d18ea4b","manufacturer":"Flexform","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-02-26_16-05-35_EFLbVp/snapshot.png"}],"wardrobe":[{"name":"Lumeo Wardrobe","furniture_id":"787942f9-8886-4f47-96cb-9828836e3680","manufacturer":"Ligne Roset","url":"https://storage.3d.io/archilogic/interior/LigneRoset/storage/LumeoWardrobe/info/3d.png"},{"name":"TRYSIL Wardrobe","furniture_id":"ceadd54d-168f-4fd0-a5fb-9c1130964357","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/storage/TRYSIL_DrawerChest/info/3d.png"},{"name":"Generic wardrobe","furniture_id":"0074a26e-5ce5-41a5-b476-07f132f8688e","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-21_04-13-52_E4Vb9D/snapshot.png"},{"name":"Generic wardrobe small","furniture_id":"0473ff14-4538-4186-bdde-1d6fb91ec03a","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-21_19-10-50_xHSJzx/snapshot.png"},{"name":"Generic Wardrobe midi","furniture_id":"df262bf5-71b2-40e1-80f3-b6818998ed87","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-21_19-10-10_oqpGWs/snapshot.png"},{"name":"Generic Wardrobe large","furniture_id":"7bd03d90-6858-4ae8-b79b-d04481090e67","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-21_19-08-16_egbI3V/snapshot.png"},{"name":"Traumart Schrank","furniture_id":"c885041b-c673-4382-bacf-592f94f3fa09","manufacturer":"Pfister","url":"https://storage.3d.io/archilogic/interior/pfister/storage/Traumart_Schrank/info/3d.png"},{"name":"Schrank Moda","furniture_id":"a1c0554b-15d0-4ef0-bc7c-1526da79a0e7","manufacturer":"Pfister","url":"https://storage.3d.io/archilogic/interior/pfister/storage/SchrankModa/info/3d.png"},{"name":"DOMBAS","furniture_id":"3bd06dce-a743-4574-9f9f-e6b44760146f","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/storage/dombas/info/3d.png"},{"name":"Clothes Press 1908","furniture_id":"675113fc-5645-48c2-b978-fbb458ca639a","manufacturer":"Baker","url":"https://storage.3d.io/archilogic/interior/Baker/storage/ClothesPress1908/info/3d.png"}],"table":[{"name":"Coffee Table","furniture_id":"00015a7c-b361-4efc-8380-d59934a52f0d","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/tables/CoffeeTable/info/3d.png"},{"name":"Occasional Low Table 35","furniture_id":"44a5fbca-de8d-4be4-9164-7688e8df4432","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-08-22_11-14-56_iUDpdm/icon.png"},{"name":"Occasional Low Table 35 Aluminium","furniture_id":"afa3fe58-cbdd-4f1d-8a37-9f888d2f2390","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-08-24_09-22-30_V7mBoq/icon3.png"},{"name":"Q3 Coffee Table","furniture_id":"f26da3a8-878d-4bb1-aa67-fa8a22178e09","manufacturer":"ODESD2","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-02-06_13-08-38_eH74vA/3d_1.png"},{"name":"Kiki Side Table","furniture_id":"974b6944-8eb4-4c56-8fd8-06d424618f76","manufacturer":"Artek","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-03-07_14-20-54_0JcdgU/snapshot.png"},{"name":"Super Fold Table Round","furniture_id":"10d32b0e-b569-4ebe-9817-19ea305db0e5","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-08-23_15-48-53_Fu7GbG/icon.png"},{"name":"HAL Table","furniture_id":"df5b0ea0-28f2-4169-b914-e8f9bc0e8a1b","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/tables/HAL-Table/info/3d.png"},{"name":"Husk Side Table","furniture_id":"92ce8782-0100-4579-b005-73b0ef2205cd","manufacturer":"B&B Italia","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-09-10_15-02-44_eaBMnO/snapshot.png"},{"name":"EM Table 200x90","furniture_id":"cd45397b-b30b-451c-b1bb-36c5156162d8","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-06-06_12-14-17_Cgsh7o/snapshot.png"},{"name":"90A Aalto Round Table","furniture_id":"c8dd5472-eb6f-4901-9ec1-4b81a33c91fc","manufacturer":"Artek","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-05-07_15-36-48_D1FvMw/snapshot.png"},{"name":"Copenhague table 110 - 200x90","furniture_id":"ff627441-5821-4811-acd8-67e5a9836fc4","manufacturer":"Hay","url":"https://storage.3d.io/archilogic/interior/hay/table/Copenhague_Table_110-200x90/info/3d.png"},{"name":"Nelson Table","furniture_id":"a77c1a4f-c176-46e2-9d61-e1a1aeddf22b","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-03-22_16-06-36_kKI2lV/snapshot.png"},{"name":"Conference-X Round","furniture_id":"bb5e386e-929e-472d-8a0e-b4d2fee90cbd","manufacturer":"Walter Knoll","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-05-22_11-45-43_WozJYi/snapshot.png"},{"name":"Small Picnic Table","furniture_id":"ac7272c0-49f2-4283-b416-729964631f46","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-31_14-54-57_r8Q1gS/snapshot.png"},{"name":"Table Solvey H740xW900xL1800","furniture_id":"74c8bd84-d8ee-4801-b9ac-47c89654595a","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-08-27_14-24-45_qS4XQS/icon.png"},{"name":"82A Aalto Table","furniture_id":"203f064a-71f5-4c92-8ebb-ec97da1514cb","manufacturer":"Artek","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-05-07_15-02-15_ode60w/snapshot.png"},{"name":"Tee-Tee Table","furniture_id":"9a45fefc-d981-453e-af35-5a4baf806f63","manufacturer":"Artek","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-10-06_14-38-55_exlAv1/snapshot.png"},{"name":"Dining Table","furniture_id":"2a365eea-f53c-4c3b-ab85-bbaf17fc0841","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/tables/DiningTable/info/3d.png"},{"name":"Billiard Table","furniture_id":"f4473d26-280e-405e-8afc-244a0e9a6022","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-03-17_16-40-29_KzGM2o/3d.png"},{"name":"Football Table","furniture_id":"70d95e22-7150-4721-a4cd-220f8cb4d5c4","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-03-16_10-12-04_hrdR68/3d.png"}],"computer":[{"name":"Computer","furniture_id":"b9c3b8b9-fcc5-45dd-bc54-81ff68ae4c2b","manufacturer":"Electronics","url":"https://storage.3d.io/535e624259ee6b0200000484/2018-01-17_14-32-01_TZLAwg/snapshot.png"},{"name":"Macbook Air","furniture_id":"6d333d6e-c81b-49c8-928a-2436ee915291","manufacturer":"Apple","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-09-25_22-47-45_nG9mlh/snapshot.png"},{"name":"iMac","furniture_id":"65ff899e-f684-43c4-be79-ed11103adcc0","manufacturer":"Apple","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-09-25_22-39-03_gDDONZ/snapshot.png"}],"small_lamp":[{"name":"GAVIK","furniture_id":"08e16b4f-528d-4ac8-b35b-c724e9f22b44","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/lightning/GAVIK/info/3d.png"},{"name":"RANARP","furniture_id":"1a16ab02-f970-46db-ae81-913ff402ad3c","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/lightning/RANARP_Table/info/3d.png"},{"name":"Melampo Tischleuchte","furniture_id":"5fca0e29-4b4b-4ab2-a30b-3bae3d8fc54d","manufacturer":"Artemide","url":"https://storage.3d.io/archilogic/interior/artemide/lamps/MelampoTischleuchte/info/3d.png"},{"name":"Funiculi-S","furniture_id":"f653dc14-8834-4881-aa6d-cb1a3970eaf1","manufacturer":"Marset","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-08_09-08-43_YGP3sP/snapshot.png"},{"name":"Rabbit Lamp","furniture_id":"e8df02e7-1794-44e8-be7a-89aec16f2d82","manufacturer":"Moooi","url":"https://storage.3d.io/archilogic/interior/moooi/lamps/Rabbit_Lamp/info/3d.png"},{"name":"Kaiser Idell Table Lamp","furniture_id":"33311114-9cbf-4d44-88f9-a2ad7adca558","manufacturer":"Fritz Hansen","url":"https://storage.3d.io/archilogic/interior/fritzhansen/lamps/Kaiser-Idell-TableLamp/info/3d.png"}],"lamp":[{"name":"Tolomeo Terra","furniture_id":"30eff235-c445-4883-9d58-5f38d1211f19","manufacturer":"Artemide","url":"https://storage.3d.io/archilogic/interior/artemide/lamps/Tolomeo-Terra/info/3d.png"},{"name":"AJ Royal","furniture_id":"1094f4e2-7556-49f2-abef-5a58c49a8cfa","manufacturer":"Santa Cole","url":"https://storage.3d.io/archilogic/interior/santacole/lamps/AJ-Royal/info/3d.png"},{"name":"Kaiser Idell Floorlamp","furniture_id":"cdaf3acd-4fb1-4ba4-a3d1-8b99f5c95839","manufacturer":"Fritz Hansen","url":"https://storage.3d.io/archilogic/interior/fritzhansen/lamps/Kaiser-Idell-Floorlamp/info/3d.png"},{"name":"Koi-12 LED","furniture_id":"0ce9a52a-ca29-4639-a7db-4c6a2622b937","manufacturer":"Belux","url":"https://storage.3d.io/archilogic/interior/Belux/lamps/Koi12/info/3d.png"},{"name":"Read Noon","furniture_id":"5238007a-0817-4381-a8eb-c4484838ce3e","manufacturer":"Zeitraum","url":"https://storage.3d.io/archilogic/interior/zeitraum/06_lamps/read_noon/info/3d.png"},{"name":"HEKTAR","furniture_id":"ebf96645-e57e-4388-8925-bf9b871b4033","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/lightning/HEKTAR/info/3d.png"},{"name":"Tolomeo Mega Terra","furniture_id":"594f3560-e9a4-48f3-9389-bed7a5225a63","manufacturer":"Artemide","url":"https://storage.3d.io/archilogic/interior/artemide/lamps/Tolomeo-Mega-Terra/info/3d.png"},{"name":"Tripode G5","furniture_id":"fa35827f-b18f-48bc-bb2c-6a458d1cebba","manufacturer":"Santa Cole","url":"https://storage.3d.io/archilogic/interior/santacole/lamps/Tripode-G5/info/3d.png"},{"name":"Fork","furniture_id":"7090bb4b-8b61-4429-8a1a-4d25d42d479a","manufacturer":"Foscarini","url":"https://storage.3d.io/archilogic/interior/foscarini/lamps/Fork/info/3d.png"}],"picture":[{"name":"Juniqe Framed Poster 120cm x 170cm","furniture_id":"3c0e5f55-b2f4-4f4f-a6e1-f49600cf1707","manufacturer":"Juniqe","url":"https://storage.3d.io/archilogic/interior/Juniqe/decoration/JuniqePoster120x170/info/3d.png"},{"name":"Juniqe Framed Poster 120cm x 120cm","furniture_id":"adc5a904-e3ef-4353-9cd4-a27a735fef43","manufacturer":"Juniqe","url":"https://storage.3d.io/archilogic/interior/Juniqe/decoration/JuniqePoster120x120/info/3d.png"},{"name":"Juniqe Framed Poster 170cm x 120cm","furniture_id":"da92a8df-a95e-48ae-b962-559128b60314","manufacturer":"Juniqe","url":"https://storage.3d.io/archilogic/interior/Juniqe/decoration/JuniqePoster170x120/info/3d.png"},{"name":"Juniqe Framed Poster 70cm x 100cm","furniture_id":"bc1e971a-b055-42ab-ab2f-f549a0d84684","manufacturer":"Juniqe","url":"https://storage.3d.io/archilogic/interior/Juniqe/decoration/JuniqePoster70x100/info/3d.png"}],"shelf":[{"name":"Eames Storage Unit ESU","furniture_id":"0bd8f3e1-6875-4010-9351-e74fde5e0b6b","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/storage/Eames-Storage-Unit/info/3d.png"},{"name":"Ladrillo","furniture_id":"1dee01db-c452-46c7-8814-9bbdc8d81a90","manufacturer":"Magis","url":"https://storage.3d.io/archilogic/interior/Magis/storage/Ladrillo/info/3d.png"},{"name":"Konte","furniture_id":"c0b88af0-ef7d-4e9e-8718-7e8852f65646","manufacturer":"Agape","url":"https://storage.3d.io/archilogic/interior/Agape/bathroom/konte-luigi-lanzi/info/3d.png"},{"name":"Kast","furniture_id":"e461623a-78a3-4b71-871f-68d6cce20cb0","manufacturer":"Vitra","url":"https://storage.3d.io/archilogic/interior/vitra/storage/Kast/info/3d.png"},{"name":"STM2","furniture_id":"8aacd7ff-eab0-4cff-b04a-2261cd4ddc79","manufacturer":"Thismade","url":"https://storage.3d.io/archilogic/interior/thismade/storage/stm2-thismade/info/3d.png"},{"name":"Storage Shelf 3OH 120cm","furniture_id":"9426bb8b-e93d-4258-906b-8a7b745e8a13","manufacturer":"Vitra","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-08-22_09-48-52_5yeiNH/snapshot.png"},{"name":"Webweb","furniture_id":"c5341683-0e4b-4b11-8a8c-1fc7f3869b0d","manufacturer":"Zeitraum","url":"https://storage.3d.io/archilogic/interior/zeitraum/04_storage/Webweb/info/3d.png"},{"name":"3 Grad Regal large","furniture_id":"87515e33-f144-4971-9b7c-006410865aa6","manufacturer":"Zeitraum","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-09-10_14-31-56_Cushn1/snapshot.png"}],"shoes":[{"name":"Indoor Slippers","furniture_id":"d9a7aafa-41d7-4466-8d79-32cb3ca7a852","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-07_10-10-45_kbAXtr/snapshot.png"},{"name":"Male Sneakers","furniture_id":"7f66634d-ca57-477c-a373-ffbe6fb45e49","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-19_08-55-00_jw8EOm/Icon_02.png"},{"name":"Stiletto","furniture_id":"3c247a52-a3a7-4eeb-b30a-30a532ba29c4","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-24_14-13-42_rkcEsV/Icon_03.png"},{"name":"Indoor Footwear","furniture_id":"b4b70e7f-5a78-444e-ba68-a477bdc8bf67","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-07_10-09-12_7eborE/snapshot.png"},{"name":"Female Ankle Boots","furniture_id":"2baed08e-0c47-45b1-9a08-9fabc121ad68","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-05-24_13-58-29_YYVoON/Icon_04.png"}],"plant":[{"name":"Orchid","furniture_id":"9a17f541-886e-467e-b740-cf665d74af11","manufacturer":"Plant","url":"https://storage.3d.io/archilogic/interior/objekte/Orchid-1/info/3d.png"},{"name":"Flower 1","furniture_id":"811f8c56-a8ab-464c-8807-476386a8ee96","manufacturer":"Plant","url":"https://storage.3d.io/archilogic/interior/objekte/Flower-1/info/3d.png"},{"name":"large plant","furniture_id":"20c2a481-dd01-4ede-973c-a4612b033a16","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-10_16-15-02_l00yjz/xlarge-plant.png"},{"name":"large plant","furniture_id":"8c4c4d48-dc51-4371-876a-09d51f10b66b","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-10_16-10-55_NTgxRk/plant-large.png"}],"books":[{"name":"Books 1","furniture_id":"4723e838-2c86-4464-a004-6712b0bda7de","manufacturer":"Details","url":"https://storage.3d.io/archilogic/interior/objekte/Books-1/info/3d.png"},{"name":"book pile","furniture_id":"ebbd007f-2bba-4b00-ae93-90d9efbc7b98","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-16_22-14-53_xqZDbq/book15a.png"},{"name":"book pile","furniture_id":"ab340431-c525-4df8-9824-bb817fa9d929","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-16_22-07-06_fBhbRE/book12.png"},{"name":"book pile","furniture_id":"47ee7165-87ec-4afc-b810-1daa46dfdd1c","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-16_22-06-17_St1EzH/book14.png"},{"name":"Book pile","furniture_id":"59de4bff-ea8c-4ee7-8690-fa492e0f48fb","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-01-16_22-06-46_QhE8V1/book13a.png"}],"other":[{"name":"Cup","furniture_id":"6346e5a6-1cca-47b3-932d-8f7cec70128a","manufacturer":"","url":"https://storage.3d.io/535e624259ee6b0200000484/2017-06-27_15-29-56_KCdxNO/snapshot.png"},{"name":"Fireplace","furniture_id":"f103bb18-96ba-4734-8905-87cd43bfb3ce","manufacturer":"Fireplace","url":"https://storage.3d.io/archilogic/interior/objekte/fireplace/info/3d.png"},{"name":"E-Guitar","furniture_id":"038fe87e-9491-42dc-8442-7d66a6c32171","manufacturer":"Instrument","url":"https://storage.3d.io/archilogic/interior/objekte/E-guitar/info/3d.png"},{"name":"French Carafe","furniture_id":"e974c59d-3458-4bbf-b45a-ff5ad6f187ba","manufacturer":"Royal VKB","url":"https://storage.3d.io/archilogic/interior/RoyalVKB/accessories/FrenchCarafe/info/3d.png"},{"name":"Avantixx 6","furniture_id":"28e7c2f6-42f9-4c33-b1e7-3972dc461d59","manufacturer":"Bosch","url":"https://storage.3d.io/archilogic/interior/Bosch/bathroom/Avantixx6/info/3d.png"},{"name":"TV 77 Wall","furniture_id":"7c13afd7-3c96-4ecb-9ff4-5b378d81eeca","manufacturer":"Electronics","url":"https://storage.3d.io/archilogic/interior/objekte/TV 77 Wall/info/3d.jpg"},{"name":"TV 50 Wall","furniture_id":"178a5162-9660-497b-af34-12752d5d00d9","manufacturer":"Electronics","url":"https://storage.3d.io/archilogic/interior/objekte/TV 50 Wall/info/3d.jpg"},{"name":"Moose","furniture_id":"3406d0ef-7993-473c-930a-e1eaae7f87e9","manufacturer":"Details","url":"https://storage.3d.io/archilogic/interior/objekte/Moose/info/3d.png"},{"name":"STOCKHOLM","furniture_id":"2584c680-082f-4307-8ac8-3705a34f7fe6","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/accessories/STOCKHOLM/info/3d.png"},{"name":"LEVANGER","furniture_id":"d96b0fb2-ed6c-43a7-b69a-230a16b717f8","manufacturer":"IKEA","url":"https://storage.3d.io/archilogic/interior/IKEA/accessories/LEVANGER/info/3d.png"}]}
 
 /***/ }),
 /* 379 */

@@ -29,6 +29,50 @@ const options = [
   {
     value: 'sofa',
     label: 'Sofa'
+  },
+  {
+    value: 'table',
+    label: 'Table'
+  },
+  {
+    value: 'wardrobe',
+    label: 'Wardrobe'
+  },
+  {
+    value: 'computer',
+    label: 'Computer'
+  },
+  {
+    value: 'small_lamp',
+    label: 'Small Lamp'
+  },
+  {
+    value: 'lamp',
+    label: 'Lamp'
+  },
+  {
+    value: 'picture',
+    label: 'Picture'
+  },
+  {
+    value: 'shelf',
+    label: 'Shelf'
+  },
+  {
+    value: 'shoes',
+    label: 'Shoes'
+  },
+  {
+    value: 'plant',
+    label: 'Plant'
+  },
+  {
+    value: 'books',
+    label: 'Books'
+  },
+  {
+    value: 'other',
+    label: 'Other'
   }
 ];
 
@@ -38,7 +82,9 @@ const furImageDiv = {
 };
 
 const furImageSize = {
-  width: '100%'
+  width: '100%',
+  'object-fit': 'contain',
+  height: '150px'
 };
 
 // @todo Take this out and use updateEntity?
@@ -93,6 +139,7 @@ export default class CommonComponents extends React.Component {
       <div>
         {furnitureData.map((item, index) => (
           <div key={index} onClick={() => this.addComponent(item.furniture_id, this.state.selectedOption.value)} style={furImageDiv}>
+            <div>{item.name}</div>
             <img src={item.url} style={furImageSize}/>
           </div>
         ))}
@@ -237,11 +284,7 @@ export default class CommonComponents extends React.Component {
     );
 
     return (
-      <Collapsible id="componentEntityHeader" className="commonComponents">
-        <div className="collapsible-header">
-          {printEntity(entity)}
-          {/* {entityButtons} */}
-        </div>
+      <div id="componentEntityHeader" className="commonComponents">
         <div className="collapsible-content">
           <div className="propertyRow">
             <label htmlFor="id" className="text">
@@ -257,7 +300,7 @@ export default class CommonComponents extends React.Component {
           <Dropdown options={options} onChange={this.handleChange} value={this.state.selectedOption} placeholder="Select an option" />
           {this.renderFurnitureImage()}
         </div>
-      </Collapsible>
+      </div>
     );
   }
 }

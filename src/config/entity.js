@@ -8,5 +8,14 @@ export default [
   'window',
   'bed',
   'chair',
-  'sofa'
+  'sofa',
+  'table',
+  'small_lamp',
+  'lamp',
+  'picture',
+  'shelf',
+  'shoes',
+  'plant',
+  'books',
+  'other'
 ];
