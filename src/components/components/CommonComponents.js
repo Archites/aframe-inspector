@@ -138,6 +138,7 @@ export default class CommonComponents extends React.Component {
 
     var id = 1;
     var entity = this.props.entity;
+
     var childrenEntity = AFRAME.INSPECTOR.scene.children;
     childrenEntity.map(item => {
       if (item.el !== undefined && item.el.id !== '') {
@@ -163,6 +164,7 @@ export default class CommonComponents extends React.Component {
       componentName = id ? `${componentName}__${id}` : componentName;
     }
     entity.setAttribute('io3d-furniture', `id:${entityID}`);
+    entity.setAttribute('class', 'new');
     entity.setAttribute(componentName, '');
     Events.emit('componentadd', { entity: entity, component: componentName });
     ga('send', 'event', 'Components', 'addComponent', componentName);

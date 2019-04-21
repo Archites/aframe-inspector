@@ -68595,6 +68595,7 @@ var AddComponent = function (_React$Component) {
       var id = 1;
       var entity = _this.props.entity;
       var childrenEntity = AFRAME.INSPECTOR.scene.children;
+
       childrenEntity.map(function (item) {
         if (item.el !== undefined && item.el.id !== '') {
           if (item.el.id.match(/[a-zA-Z]+/g)[0] === componentName) {
@@ -68862,6 +68863,7 @@ var CommonComponents = function (_React$Component) {
 
       var id = 1;
       var entity = _this.props.entity;
+
       var childrenEntity = AFRAME.INSPECTOR.scene.children;
       childrenEntity.map(function (item) {
         if (item.el !== undefined && item.el.id !== '') {
@@ -68885,6 +68887,7 @@ var CommonComponents = function (_React$Component) {
         componentName = _id ? componentName + '__' + _id : componentName;
       }
       entity.setAttribute('io3d-furniture', 'id:' + entityID);
+      entity.setAttribute('class', 'new');
       entity.setAttribute(componentName, '');
       _Events2.default.emit('componentadd', { entity: entity, component: componentName });
       ga('send', 'event', 'Components', 'addComponent', componentName);
@@ -70752,23 +70755,15 @@ var Toolbar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Toolbar.__proto__ || Object.getPrototypeOf(Toolbar)).call(this, props));
 
     _this.writeChanges = function () {
-      // const xhr = new XMLHttpRequest();
-      // xhr.open('POST', 'http://localhost:51234/save');
-      // xhr.onerror = () => {
-      //   alert('aframe-watcher not running. This feature requires a companion service running locally. npm install aframe-watcher to save changes back to file. Read more at supermedium.com/aframe-watcher');
-      // };
-      // xhr.setRequestHeader('Content-Type', 'application/json');
-      // xhr.send(JSON.stringify(AFRAME.INSPECTOR.history.updates));
-      // const ref = firebase.database().ref(window.location.pathname.replace(/\//g, ''));
       // eslint-disable-next-line react/prop-types
       var location = _this.props.location;
 
       var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
-      console.log(historyUpdate);
+      var newOrder = document.getElementsByClassName('new');
 
-      if (Object.keys(historyUpdate).length === 0) {
+      if (Object.keys(historyUpdate).length === 0 && newOrder.length === 0) {
         console.log('Do not update history');return;
       }
 
@@ -70779,18 +70774,55 @@ var Toolbar = function (_React$Component) {
         var htmlTag = snapshot.val();
         var soup = new _jssoup2.default(htmlTag);
 
-        Object.keys(historyUpdate).forEach(function (key) {
-          if (soup.find('Entity', { id: key }) !== undefined) {
-            if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
-            if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
-            ref.set(soup.prettify()).then(function () {
-              console.log('Save success');
-              process.exit(0);
+        if (Object.keys(historyUpdate).length === 0) {
+          var _loop = function _loop() {
+            var newSoup = new _jssoup2.default('<Entity />');
+            var element = newOrder[0];
+            Object.keys(element.attributes).forEach(function (key) {
+              var attr = element.attributes[key];
+              if (attr.nodeName !== 'class') {
+                newSoup.attrs[attr.nodeName] = attr.nodeValue;
+              }
             });
-          } else {
-            console.log('test version');
+            newOrder[0].classList.remove('new');
+            soup.append(newSoup);
+          };
+
+          while (newOrder.length > 0) {
+            _loop();
           }
-        });
+          ref.set(soup.prettify()).then(function () {
+            console.log('Save success');
+            process.exit(0);
+          });
+        } else {
+          var _loop2 = function _loop2() {
+            var newSoup = new _jssoup2.default('<Entity />');
+            var element = newOrder[0];
+            Object.keys(element.attributes).forEach(function (key) {
+              var attr = element.attributes[key];
+              if (attr.nodeName !== 'class') {
+                newSoup.attrs[attr.nodeName] = attr.nodeValue;
+              }
+            });
+            newOrder[0].classList.remove('new');
+            soup.append(newSoup);
+          };
+
+          while (newOrder.length > 0) {
+            _loop2();
+          }
+          Object.keys(historyUpdate).forEach(function (key) {
+            if (soup.find('Entity', { id: key }) !== undefined) {
+              if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
+              if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
+            }
+          });
+          ref.set(soup.prettify()).then(function () {
+            console.log('Save success');
+            process.exit(0);
+          });
+        }
       });
     };
 
@@ -70810,8 +70842,6 @@ var Toolbar = function (_React$Component) {
     _this.state = {
       isPlaying: false
     };
-
-    console.log(_this.props);
 
     _firebase2.default.initializeApp(_firebase4.default);
     return _this;
