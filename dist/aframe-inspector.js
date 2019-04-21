@@ -68888,6 +68888,7 @@ var CommonComponents = function (_React$Component) {
       }
       entity.setAttribute('class', 'new');
       entity.setAttribute('key', 'io3d-furniture=id:' + entityID);
+      entity.setAttribute(componentName, '');
       _Events2.default.emit('componentadd', { entity: entity, component: componentName });
       ga('send', 'event', 'Components', 'addComponent', componentName);
     }, _this.handleChange = function (selectedOption) {
@@ -70772,17 +70773,19 @@ var Toolbar = function (_React$Component) {
         }
         var htmlTag = snapshot.val();
         var soup = new _jssoup2.default(htmlTag);
+        var newSoup = void 0;
 
         if (Object.keys(historyUpdate).length === 0) {
           var _loop = function _loop() {
-            var newSoup = new _jssoup2.default('<Entity />');
+            newSoup = new _jssoup2.default('<Entity />');
             var element = newOrder[0];
             Object.keys(element.attributes).forEach(function (key) {
               var attr = element.attributes[key];
+              if (attr.nodeName === 'io3d-furniture') return;
+
               if (attr.nodeName === 'key') {
-                var _key = attr.nodeValue.split('=')[0];
                 var value = attr.nodeValue.split('=')[1];
-                newSoup.attrs[_key] = value;
+                newSoup.attrs['io3d-furniture'] = value;
               } else if (attr.nodeName !== 'class') {
                 newSoup.attrs[attr.nodeName] = attr.nodeValue;
               }
@@ -70801,10 +70804,11 @@ var Toolbar = function (_React$Component) {
             var element = newOrder[0];
             Object.keys(element.attributes).forEach(function (key) {
               var attr = element.attributes[key];
+              if (attr.nodeName === 'io3d-furniture') return;
+
               if (attr.nodeName === 'key') {
-                var _key2 = attr.nodeValue.split('=')[0];
                 var value = attr.nodeValue.split('=')[1];
-                newSoup.attrs[_key2] = value;
+                newSoup.attrs['io3d-furniture'] = value;
               } else if (attr.nodeName !== 'class') {
                 newSoup.attrs[attr.nodeName] = attr.nodeValue;
               }

@@ -165,6 +165,7 @@ export default class CommonComponents extends React.Component {
     }
     entity.setAttribute('class', 'new');
     entity.setAttribute('key', 'io3d-furniture=id:' + entityID);
+    entity.setAttribute(componentName, '');
     Events.emit('componentadd', { entity: entity, component: componentName });
     ga('send', 'event', 'Components', 'addComponent', componentName);
   };

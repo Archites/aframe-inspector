@@ -97,17 +97,19 @@ class Toolbar extends React.Component {
       }
       const htmlTag = snapshot.val();
       let soup = new JSSoup(htmlTag);
+      let newSoup;
 
       if (Object.keys(historyUpdate).length === 0) {
         while (newOrder.length > 0) {
-          let newSoup = new JSSoup('<Entity />');
+          newSoup = new JSSoup('<Entity />');
           const element = newOrder[0];
           Object.keys(element.attributes).forEach(key => {
             const attr = element.attributes[key];
+            if (attr.nodeName === 'io3d-furniture') return;
+
             if (attr.nodeName === 'key') {
-              const key = attr.nodeValue.split('=')[0];
               const value = attr.nodeValue.split('=')[1];
-              newSoup.attrs[key] = value;
+              newSoup.attrs['io3d-furniture'] = value;
             } else if (attr.nodeName !== 'class') {
               newSoup.attrs[attr.nodeName] = attr.nodeValue;
             }
@@ -122,10 +124,11 @@ class Toolbar extends React.Component {
           const element = newOrder[0];
           Object.keys(element.attributes).forEach(key => {
             const attr = element.attributes[key];
+            if (attr.nodeName === 'io3d-furniture') return;
+
             if (attr.nodeName === 'key') {
-              const key = attr.nodeValue.split('=')[0];
               const value = attr.nodeValue.split('=')[1];
-              newSoup.attrs[key] = value;
+              newSoup.attrs['io3d-furniture'] = value;
             } else if (attr.nodeName !== 'class') {
               newSoup.attrs[attr.nodeName] = attr.nodeValue;
             }
