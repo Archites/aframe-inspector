@@ -140,14 +140,14 @@ export default class CommonComponents extends React.Component {
     var entity = this.props.entity;
     var childrenEntity = AFRAME.INSPECTOR.scene.children;
     childrenEntity.map(item => {
-      if (item.el !== undefined && item.el.id !== undefined) {
-        if (item.el.id.substring(0, item.el.id.length - 1) === type) {
-          id = item.el.id.substring(item.el.id.length - 1, item.el.id.length);
+      if (item.el !== undefined && item.el.id !== '') {
+        if (item.el.id.match(/[a-zA-Z]+/g)[0] === type) {
+          id = item.el.id.substring(type.length);
           id++;
         }
       }
     });
-    if (entity.id.substring(0, entity.id.length - 1) !== type) {
+    if (entity.id.match(/[a-zA-Z]+/) !== type) {
       changeId(entity, type + id);
     }
     // const newEntity = `<a-entity io3d-furniture="${entityID}"></a-entity>`
