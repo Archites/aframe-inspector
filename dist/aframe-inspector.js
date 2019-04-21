@@ -71804,18 +71804,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
     this.handleGizmos = {
       X: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0xff0000 })), [0.5, 0, 0], [0, 0, -Math.PI / 2]], [new THREE.Line(lineXGeometry, new GizmoLineMaterial({ color: 0xff0000 }))]],
 
-      // Y: [
-      //   [
-      //     new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })),
-      //     [0, 0.5, 0]
-      //   ],
-      //   [
-      //     new THREE.Line(
-      //       lineYGeometry,
-      //       new GizmoLineMaterial({ color: 0x00ff00 })
-      //     )
-      //   ]
-      // ],
+      Y: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })), [0, 0.5, 0]], [new THREE.Line(lineYGeometry, new GizmoLineMaterial({ color: 0x00ff00 }))]],
 
       Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]],
 
@@ -71857,15 +71846,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
     this.pickerGizmos = {
       X: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0.6, 0, 0], [0, 0, -Math.PI / 2]]],
 
-      // Y: [
-      //   [
-      //     new THREE.Mesh(
-      //       new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false),
-      //       pickerMaterial
-      //     ),
-      //     [0, 0.6, 0]
-      //   ]
-      // ],
+      Y: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0.6, 0]]],
 
       Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
 
@@ -71962,7 +71943,7 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
       //   ]
       // ],
 
-      Y: [[new THREE.Line(new CircleGeometry(1, 'y', 1), new GizmoLineMaterial({ color: 0x00ff00 }))]]
+      Y: [[new THREE.Line(new CircleGeometry(1, 'y', 1), new GizmoLineMaterial({ color: 'red' }))]]
 
       // Z: [
       //   [

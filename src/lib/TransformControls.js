@@ -224,18 +224,18 @@
         ]
       ],
 
-      // Y: [
-      //   [
-      //     new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })),
-      //     [0, 0.5, 0]
-      //   ],
-      //   [
-      //     new THREE.Line(
-      //       lineYGeometry,
-      //       new GizmoLineMaterial({ color: 0x00ff00 })
-      //     )
-      //   ]
-      // ],
+      Y: [
+        [
+          new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })),
+          [0, 0.5, 0]
+        ],
+        [
+          new THREE.Line(
+            lineYGeometry,
+            new GizmoLineMaterial({ color: 0x00ff00 })
+          )
+        ]
+      ],
 
       Z: [
         [
@@ -307,15 +307,15 @@
         ]
       ],
 
-      // Y: [
-      //   [
-      //     new THREE.Mesh(
-      //       new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false),
-      //       pickerMaterial
-      //     ),
-      //     [0, 0.6, 0]
-      //   ]
-      // ],
+      Y: [
+        [
+          new THREE.Mesh(
+            new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false),
+            pickerMaterial
+          ),
+          [0, 0.6, 0]
+        ]
+      ],
 
       Z: [
         [
@@ -462,7 +462,7 @@
         [
           new THREE.Line(
             new CircleGeometry(1, 'y', 1),
-            new GizmoLineMaterial({ color: 0x00ff00 })
+            new GizmoLineMaterial({ color: 'red' })
           )
         ]
       ]
