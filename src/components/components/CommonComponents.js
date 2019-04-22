@@ -78,7 +78,7 @@ const options = [
 
 const furImageDiv = {
   display: 'inline-block',
-  width: '165.5px'
+  width: '155px'
 };
 
 const furImageSize = {
@@ -136,7 +136,7 @@ export default class CommonComponents extends React.Component {
       return null;
     }
     return (
-      <div>
+      <div style={{ padding: '8px' }}>
         {furnitureData.map((item, index) => (
           <div key={index} onClick={() => this.addComponent(item.furniture_id, this.state.selectedOption.value)} style={furImageDiv}>
             <div>{item.name}</div>
@@ -200,7 +200,7 @@ export default class CommonComponents extends React.Component {
     }
     // const newEntity = `<a-entity io3d-furniture="${entityID}"></a-entity>`
     var packageName;
-    var selectedOption = this.options.filter(function(option) {
+    var selectedOption = this.options.filter(function (option) {
       return option.value === componentName;
     })[0];
 
