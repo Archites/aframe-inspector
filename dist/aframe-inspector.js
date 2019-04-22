@@ -70563,8 +70563,6 @@ var SceneGraph = function (_React$Component) {
     };
 
     _this.renderEntities = function () {
-      console.log(_this.state.filteredEntities);
-
       return _this.state.filteredEntities.map(function (entityOption, idx) {
         if (!_this.isVisibleInSceneGraph(entityOption.entity) && !_this.state.filter) {
           return null;
@@ -70871,7 +70869,7 @@ var Toolbar = function (_React$Component) {
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
               if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
-              if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
+              if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotation'] = historyUpdate[key]['rotation'];
             }
           });
           ref.set(soup.prettify());
