@@ -247,6 +247,8 @@ export default class SceneGraph extends React.Component {
   };
 
   renderEntities = () => {
+    console.log(this.state.filteredEntities);
+
     return this.state.filteredEntities.map((entityOption, idx) => {
       if (
         !this.isVisibleInSceneGraph(entityOption.entity) &&

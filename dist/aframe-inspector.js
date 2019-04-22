@@ -16919,7 +16919,7 @@ exports.default = Vec4Widget;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = ['box', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa', 'wardrobe', 'table', 'computer', 'small_lamp', 'lamp', 'picture', 'shelf', 'shoes', 'plant', 'books', 'other'];
+exports.default = ['[default]', 'closet', 'door', 'floor', 'kitchen', 'wall', 'window', 'bed', 'chair', 'sofa', 'wardrobe', 'table', 'computer', 'small_lamp', 'lamp', 'picture', 'shelf', 'shoes', 'plant', 'books', 'other'];
 
 /***/ }),
 /* 113 */
@@ -70270,16 +70270,16 @@ var Entity = function (_React$Component) {
       // const pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
       // let collapse;
       // if (entity.children.length > 0 && !isFiltering) {
-      //   collapse = (
-      //     <span
-      //       onClick={() => this.props.toggleExpandedCollapsed(entity)}
-      //       className={`collapsespace fa ${
-      //         isExpanded ? 'fa-caret-down' : 'fa-caret-right'
-      //       }`}
-      //     />
-      //   );
+      // collapse = (
+      //   <span
+      //     onClick={() => this.props.toggleExpandedCollapsed(entity)}
+      //     className={`collapsespace fa fa-caret-down'${
+      //       isExpanded ? 'fa-caret-down' : 'fa-caret-right'
+      //     }`}
+      //   />
+      // );
       // } else {
-      //   collapse = <span className="collapsespace" />;
+      // collapse = <span className="collapsespace" />;
       // }
 
       // Visibility button.
@@ -70563,6 +70563,8 @@ var SceneGraph = function (_React$Component) {
     };
 
     _this.renderEntities = function () {
+      console.log(_this.state.filteredEntities);
+
       return _this.state.filteredEntities.map(function (entityOption, idx) {
         if (!_this.isVisibleInSceneGraph(entityOption.entity) && !_this.state.filter) {
           return null;
@@ -70915,7 +70917,7 @@ var Toolbar = function (_React$Component) {
   }, {
     key: 'addEntity',
     value: function addEntity() {
-      _Events2.default.emit('entitycreate', { element: 'a-entity', components: {} });
+      _Events2.default.emit('entitycreate', { element: 'a-entity', components: { id: '[default]' } });
     }
 
     /**
@@ -70943,11 +70945,6 @@ var Toolbar = function (_React$Component) {
             title: 'Add a new entity',
             onClick: this.addEntity
           }),
-          _react2.default.createElement('a', {
-            id: 'playPauseScene',
-            className: 'button fa ' + (this.state.isPlaying ? 'fa-pause' : 'fa-play'),
-            title: this.state.isPlaying ? 'Pause scene' : 'Resume scene',
-            onClick: this.toggleScenePlaying }),
           _react2.default.createElement('a', {
             className: watcherClassNames,
             title: watcherTitle,

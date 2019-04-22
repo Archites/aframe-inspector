@@ -67,16 +67,16 @@ export default class Entity extends React.Component {
     // const pad = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(this.props.depth);
     // let collapse;
     // if (entity.children.length > 0 && !isFiltering) {
-    //   collapse = (
-    //     <span
-    //       onClick={() => this.props.toggleExpandedCollapsed(entity)}
-    //       className={`collapsespace fa ${
-    //         isExpanded ? 'fa-caret-down' : 'fa-caret-right'
-    //       }`}
-    //     />
-    //   );
+    // collapse = (
+    //   <span
+    //     onClick={() => this.props.toggleExpandedCollapsed(entity)}
+    //     className={`collapsespace fa fa-caret-down'${
+    //       isExpanded ? 'fa-caret-down' : 'fa-caret-right'
+    //     }`}
+    //   />
+    // );
     // } else {
-    //   collapse = <span className="collapsespace" />;
+    // collapse = <span className="collapsespace" />;
     // }
 
     // Visibility button.
@@ -108,8 +108,8 @@ export default class Entity extends React.Component {
           {/* <span
             className="entityChildPadding"
             // dangerouslySetInnerHTML={{ __html: pad }}
-          />
-          {collapse} */}
+          /> */}
+          {/* {collapse} */}
           {printEntity(entity, this.onDoubleClick)}
         </span>
         <span className="entityActions">

@@ -1,5 +1,5 @@
 export default [
-  'box',
+  '[default]',
   'closet',
   'door',
   'floor',

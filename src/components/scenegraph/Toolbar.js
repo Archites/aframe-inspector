@@ -69,7 +69,7 @@ class Toolbar extends React.Component {
   }
 
   addEntity () {
-    Events.emit('entitycreate', { element: 'a-entity', components: {} });
+    Events.emit('entitycreate', { element: 'a-entity', components: { id: '[default]' } });
   }
 
   /**
@@ -182,12 +182,12 @@ class Toolbar extends React.Component {
             title="Add a new entity"
             onClick={this.addEntity}
           />
-          <a
+          {/* <a
             id="playPauseScene"
             className={'button fa ' + (this.state.isPlaying ? 'fa-pause' : 'fa-play')}
             title={this.state.isPlaying ? 'Pause scene' : 'Resume scene'}
             onClick={this.toggleScenePlaying}>
-          </a>
+          </a> */}
           {/* <a
             className="gltfIcon"
             title="Export to GLTF"
