@@ -70301,7 +70301,7 @@ var Entity = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: className, onClick: this.onClick },
+        { className: className, onClick: this.onClick, onDoubleClick: this.onDoubleClick },
         _react2.default.createElement(
           'span',
           null,

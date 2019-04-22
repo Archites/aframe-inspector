@@ -102,7 +102,7 @@ export default class Entity extends React.Component {
     });
 
     return (
-      <div className={className} onClick={this.onClick}>
+      <div className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick}>
         <span>
           {/* {visibilityButton} */}
           {/* <span
