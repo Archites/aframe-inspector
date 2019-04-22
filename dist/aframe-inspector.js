@@ -16493,7 +16493,11 @@ var TextureWidget = function (_React$Component) {
       if (!component) {
         return;
       }
-      var newValue = component.attrValue[this.props.name];
+
+      var newValue;
+      if (component.attrValue) {
+        newValue = component.attrValue[this.props.name];
+      }
 
       // This will be triggered typically when the element is changed directly with element.setAttribute
       if (newValue && newValue !== this.state.value) {
@@ -24118,11 +24122,13 @@ Inspector.prototype = {
     if (entity === this.sceneEl) {
       return;
     }
-    entity.object3D.traverse(function (node) {
-      if (_this5.helpers[node.uuid]) {
-        _this5.helpers[node.uuid].visible = true;
-      }
-    });
+    if (entity.object3D) {
+      entity.object3D.traverse(function (node) {
+        if (_this5.helpers[node.uuid]) {
+          _this5.helpers[node.uuid].visible = true;
+        }
+      });
+    }
   },
 
   initEvents: function initEvents() {
@@ -73008,12 +73014,12 @@ function initRaycaster(inspector) {
     mouseCursor.components.raycaster.refreshObjects();
   }, 250));
 
-  mouseCursor.addEventListener('click', handleClick);
+  // mouseCursor.addEventListener('click', handleClick);
   mouseCursor.addEventListener('mouseenter', onMouseEnter);
   mouseCursor.addEventListener('mouseleave', onMouseLeave);
   inspector.container.addEventListener('mousedown', onMouseDown);
   inspector.container.addEventListener('mouseup', onMouseUp);
-  inspector.container.addEventListener('dblclick', onDoubleClick);
+  // inspector.container.addEventListener('dblclick', onDoubleClick);
 
   inspector.sceneEl.canvas.addEventListener('mouseleave', function () {
     setTimeout(function () {
