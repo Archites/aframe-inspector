@@ -73013,7 +73013,7 @@ function initRaycaster(inspector) {
     mouseCursor.components.raycaster.refreshObjects();
   }, 250));
 
-  // mouseCursor.addEventListener('click', handleClick);
+  mouseCursor.addEventListener('click', handleClick);
   mouseCursor.addEventListener('mouseenter', onMouseEnter);
   mouseCursor.addEventListener('mouseleave', onMouseLeave);
   inspector.container.addEventListener('mousedown', onMouseDown);

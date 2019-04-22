@@ -38,7 +38,7 @@ function initRaycaster (inspector) {
     }, 250)
   );
 
-  // mouseCursor.addEventListener('click', handleClick);
+  mouseCursor.addEventListener('click', handleClick);
   mouseCursor.addEventListener('mouseenter', onMouseEnter);
   mouseCursor.addEventListener('mouseleave', onMouseLeave);
   inspector.container.addEventListener('mousedown', onMouseDown);
