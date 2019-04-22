@@ -70764,7 +70764,8 @@ var Toolbar = function (_React$Component) {
       var newOrder = document.getElementsByClassName('new');
 
       if (Object.keys(historyUpdate).length === 0 && newOrder.length === 0) {
-        console.log('Do not update history');return;
+        alert('No change occured');
+        return;
       }
 
       ref.on('value', function (snapshot) {
@@ -70777,7 +70778,7 @@ var Toolbar = function (_React$Component) {
 
         if (Object.keys(historyUpdate).length === 0) {
           var _loop = function _loop() {
-            tempTag = '<Entity ';
+            tempTag += '<Entity ';
             var element = newOrder[0];
             Object.keys(element.attributes).forEach(function (key) {
               var attr = element.attributes[key];
@@ -70797,12 +70798,10 @@ var Toolbar = function (_React$Component) {
           while (newOrder.length > 0) {
             _loop();
           }
-          ref.set(soup.prettify() + tempTag).then(function () {
-            return alert('Save successful!');
-          });
+          ref.set(soup.prettify() + tempTag);
         } else {
           var _loop2 = function _loop2() {
-            tempTag = '<Entity ';
+            tempTag += '<Entity ';
             var element = newOrder[0];
             Object.keys(element.attributes).forEach(function (key) {
               var attr = element.attributes[key];
@@ -70830,10 +70829,10 @@ var Toolbar = function (_React$Component) {
               if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotaion'] = historyUpdate[key]['rotaion'];
             }
           });
-          ref.set(soup.prettify()).then(function () {
-            return alert('Save successful!');
-          });
+          ref.set(soup.prettify());
         }
+      }).then(function () {
+        alert('Save successful!');
       });
     };
 

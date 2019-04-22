@@ -88,7 +88,8 @@ class Toolbar extends React.Component {
     var newOrder = document.getElementsByClassName('new');
 
     if (Object.keys(historyUpdate).length === 0 && newOrder.length === 0) {
-      console.log('Do not update history'); return;
+      alert('No change occured');
+      return;
     }
 
     ref.on('value', function (snapshot) {
@@ -101,7 +102,7 @@ class Toolbar extends React.Component {
 
       if (Object.keys(historyUpdate).length === 0) {
         while (newOrder.length > 0) {
-          tempTag = '<Entity ';
+          tempTag += '<Entity ';
           let element = newOrder[0];
           Object.keys(element.attributes).forEach(function (key) {
             var attr = element.attributes[key];
@@ -117,10 +118,10 @@ class Toolbar extends React.Component {
           tempTag += '></Entity>';
           newOrder[0].classList.remove('new');
         }
-        ref.set(soup.prettify() + tempTag).then(() => alert('Save successful!'));
+        ref.set(soup.prettify() + tempTag);
       } else {
         while (newOrder.length > 0) {
-          tempTag = '<Entity ';
+          tempTag += '<Entity ';
           let element = newOrder[0];
           Object.keys(element.attributes).forEach(function (key) {
             var attr = element.attributes[key];
@@ -144,8 +145,10 @@ class Toolbar extends React.Component {
             if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotaion'] = historyUpdate[key]['rotaion'];
           }
         });
-        ref.set(soup.prettify()).then(() => alert('Save successful!'));
+        ref.set(soup.prettify());
       }
+    }).then(() => {
+      alert('Save successful!');
     });
   };
 
