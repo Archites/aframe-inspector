@@ -72483,48 +72483,51 @@ THREE.EditorControls.prototype.constructor = THREE.EditorControls;
           if (scope.axis.search('Y') === -1) point.y = 0;
           if (scope.axis.search('Z') === -1) point.z = 0;
 
-          // if (point.x > 0) {
-          //   point.x = Math.round(point.x * 2) / 2;
-          //   const tempCal = point.x % 0.5;
-          //   if (tempCal > 0) {
-          //     point.x += 0.5;
-          //   }
-          // }
-          // if (point.x < 0) {
-          //   point.x = Math.round(point.x * 2) / 2;
-          //   const tempCal = point.x % 0.5;
-          //   if (tempCal > 0) {
-          //     point.x -= 0.5;
-          //   }
-          // }
-          // if (point.y > 0) {
-          //   point.y = Math.round(point.y * 2) / 2;
-          //   const tempCal = point.y % 0.5;
-          //   if (tempCal > 0) {
-          //     point.y += 0.5;
-          //   }
-          // }
-          // if (point.y < 0) {
-          //   point.y = Math.round(point.y * 2) / 2;
-          //   const tempCal = point.y % 0.5;
-          //   if (tempCal > 0) {
-          //     point.y -= 0.5;
-          //   }
-          // }
-          // if (point.z > 0) {
-          //   point.z = Math.round(point.z * 2) / 2;
-          //   const tempCal = point.z % 0.5;
-          //   if (tempCal > 0) {
-          //     point.z += 0.5;
-          //   }
-          // }
-          // if (point.z < 0) {
-          //   point.z = Math.round(point.z * 2) / 2;
-          //   const tempCal = point.z % 0.5;
-          //   if (tempCal > 0) {
-          //     point.z -= 0.5;
-          //   }
-          // }
+          var eleName = scope.object.el.id;
+          if (eleName.indexOf('floor') !== -1 || eleName.indexOf('wall') !== -1) {
+            if (point.x > 0) {
+              point.x = Math.round(point.x * 2) / 2;
+              var tempCal = point.x % 0.5;
+              if (tempCal > 0) {
+                point.x += 0.5;
+              }
+            }
+            if (point.x < 0) {
+              point.x = Math.round(point.x * 2) / 2;
+              var _tempCal = point.x % 0.5;
+              if (_tempCal > 0) {
+                point.x -= 0.5;
+              }
+            }
+            if (point.y > 0) {
+              point.y = Math.round(point.y * 2) / 2;
+              var _tempCal2 = point.y % 0.5;
+              if (_tempCal2 > 0) {
+                point.y += 0.5;
+              }
+            }
+            if (point.y < 0) {
+              point.y = Math.round(point.y * 2) / 2;
+              var _tempCal3 = point.y % 0.5;
+              if (_tempCal3 > 0) {
+                point.y -= 0.5;
+              }
+            }
+            if (point.z > 0) {
+              point.z = Math.round(point.z * 2) / 2;
+              var _tempCal4 = point.z % 0.5;
+              if (_tempCal4 > 0) {
+                point.z += 0.5;
+              }
+            }
+            if (point.z < 0) {
+              point.z = Math.round(point.z * 2) / 2;
+              var _tempCal5 = point.z % 0.5;
+              if (_tempCal5 > 0) {
+                point.z -= 0.5;
+              }
+            }
+          }
 
           point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
