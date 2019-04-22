@@ -70800,6 +70800,7 @@ var Toolbar = function (_React$Component) {
       var location = _this.props.location;
 
       var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
+
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
       var newOrder = document.getElementsByClassName('new');
@@ -70809,7 +70810,7 @@ var Toolbar = function (_React$Component) {
         return;
       }
 
-      ref.on('value', function (snapshot) {
+      ref.once('value', function (snapshot) {
         if (!snapshot.exists()) {
           console.log('Firebase has not references database');return;
         }
@@ -70840,6 +70841,7 @@ var Toolbar = function (_React$Component) {
             _loop();
           }
           ref.set(soup.prettify() + tempTag);
+          alert('Save successful!');
         } else {
           var _loop2 = function _loop2() {
             tempTag += '<Entity ';
@@ -70871,9 +70873,8 @@ var Toolbar = function (_React$Component) {
             }
           });
           ref.set(soup.prettify());
+          alert('Save successful!');
         }
-      }).then(function () {
-        alert('Save successful!');
       });
     };
 

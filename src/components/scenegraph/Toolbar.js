@@ -83,6 +83,7 @@ class Toolbar extends React.Component {
       .child('room')
       .child(location.state.roomId)
       .child('element');
+
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 
     var newOrder = document.getElementsByClassName('new');
@@ -92,7 +93,7 @@ class Toolbar extends React.Component {
       return;
     }
 
-    ref.on('value', function (snapshot) {
+    ref.once('value', (snapshot) => {
       if (!snapshot.exists()) {
         console.log('Firebase has not references database'); return;
       }
@@ -119,6 +120,7 @@ class Toolbar extends React.Component {
           newOrder[0].classList.remove('new');
         }
         ref.set(soup.prettify() + tempTag);
+        alert('Save successful!');
       } else {
         while (newOrder.length > 0) {
           tempTag += '<Entity ';
@@ -146,9 +148,8 @@ class Toolbar extends React.Component {
           }
         });
         ref.set(soup.prettify());
+        alert('Save successful!');
       }
-    }).then(() => {
-      alert('Save successful!');
     });
   };
 
