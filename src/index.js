@@ -4,7 +4,7 @@ require('../vendor/ga');
 var Events = require('./lib/Events');
 var Viewport = require('./lib/viewport');
 var AssetsLoader = require('./lib/assetsLoader');
-var Shortcuts = require('./lib/shortcuts');
+// var Shortcuts = require('./lib/shortcuts');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -67,7 +67,7 @@ Inspector.prototype = {
   },
 
   initUI: function () {
-    Shortcuts.init(this);
+    // Shortcuts.init(this);
     this.initEvents();
 
     this.selected = null;
@@ -263,7 +263,7 @@ Inspector.prototype = {
     this.sceneEl.pause();
     this.sceneEl.exitVR();
 
-    Shortcuts.enable();
+    // Shortcuts.enable();
 
     // Trick scene to run the cursor tick.
     this.sceneEl.isPlaying = true;
@@ -306,7 +306,7 @@ Inspector.prototype = {
     }
     document.body.classList.remove('aframe-inspector-opened');
     this.sceneEl.resize();
-    Shortcuts.disable();
+    // Shortcuts.disable();
   }
 };
 
