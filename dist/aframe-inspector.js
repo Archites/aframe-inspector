@@ -68842,7 +68842,7 @@ var options = [{
 
 var furImageDiv = {
   display: 'inline-block',
-  width: '150px'
+  width: '149px'
 };
 
 var furImageSize = {
@@ -70801,6 +70801,11 @@ var Toolbar = function (_React$Component) {
       var location = _this.props.location;
 
       var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
+      // const ref = firebase.database()
+      //   .ref('2YzQLH3NoxfXp376sQhhEbzkeqM2')
+      //   .child('room')
+      //   .child('-Ld879gyWumsJ15OBdvU')
+      //   .child('element');
 
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
@@ -70869,10 +70874,12 @@ var Toolbar = function (_React$Component) {
           soup = new _jssoup2.default(htmlTag);
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
-              if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
-              if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotation'] = historyUpdate[key]['rotation'];
+              Object.keys(historyUpdate[key]).forEach(function (value) {
+                soup.find('Entity', { id: key }).attrs[value] = historyUpdate[key][value];
+              });
             }
           });
+          console.log(soup.prettify());
           ref.set(soup.prettify());
           alert('Save successful!');
         }
