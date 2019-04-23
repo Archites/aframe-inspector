@@ -70875,12 +70875,19 @@ var Toolbar = function (_React$Component) {
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
               Object.keys(historyUpdate[key]).forEach(function (value) {
-                console.log(historyUpdate[key][value]);
-                soup.find('Entity', { id: key }).attrs[value] = historyUpdate[key][value];
+                if (typeof value === 'string') {
+                  soup.find('Entity', { id: key }).attrs[value] = historyUpdate[key][value];
+                } else {
+                  var temp = '';
+                  Object.keys(historyUpdate[key][value]).forEach(function (data) {
+                    temp += data + ': ' + historyUpdate[key][value][data] + '; ';
+                  });
+                  soup.find('Entity', { id: key }).attrs[value] = temp;
+                  console.log('temp => ', temp);
+                }
               });
             }
           });
-          // console.log(soup.prettify());
           ref.set(soup.prettify());
           alert('Save successful!');
         }
