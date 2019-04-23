@@ -68842,7 +68842,7 @@ var options = [{
 
 var furImageDiv = {
   display: 'inline-block',
-  width: '155px'
+  width: '149px'
 };
 
 var furImageSize = {

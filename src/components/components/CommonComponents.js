@@ -78,7 +78,7 @@ const options = [
 
 const furImageDiv = {
   display: 'inline-block',
-  width: '155px'
+  width: '149px'
 };
 
 const furImageSize = {
