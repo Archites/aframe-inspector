@@ -68624,6 +68624,7 @@ var AddComponent = function (_React$Component) {
       }
 
       entity.setAttribute(componentName, '');
+      entity.setAttribute('class', 'new');
       _Events2.default.emit('componentadd', { entity: entity, component: componentName });
       ga('send', 'event', 'Components', 'addComponent', componentName);
     }, _temp), _possibleConstructorReturn(_this, _ret);
