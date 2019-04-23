@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { withRouter } from 'react-router-dom';
 // import { printEntity, removeEntity, cloneEntity } from '../../lib/entity';
 import { printEntity, removeEntity } from '../../lib/entity';
 import entityConfig from '../../config/entity';
 
 const Events = require('../../lib/Events.js');
 
-export default class Entity extends React.Component {
+class Entity extends React.Component {
   static propTypes = {
     depth: PropTypes.number,
     entity: PropTypes.object,
@@ -15,7 +16,8 @@ export default class Entity extends React.Component {
     isFiltering: PropTypes.bool,
     isSelected: PropTypes.bool,
     selectEntity: PropTypes.func,
-    toggleExpandedCollapsed: PropTypes.func
+    toggleExpandedCollapsed: PropTypes.func,
+    location: PropTypes.object
   };
 
   constructor (props) {
@@ -51,12 +53,13 @@ export default class Entity extends React.Component {
     //       className="button fa fa-clone"
     //     />
     //   );
+    const { location } = this.props;
     const removeButton =
       tagName === 'a-scene' ? null : (
         <a
           onClick={event => {
             event.stopPropagation();
-            removeEntity(entity);
+            removeEntity(entity, false, location);
           }}
           title="Remove entity"
           className="button fa fa-trash"
@@ -120,3 +123,5 @@ export default class Entity extends React.Component {
     );
   }
 }
+
+export default withRouter(Entity);

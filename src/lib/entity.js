@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase';
 var Events = require('../lib/Events.js');
 import entityConfig from '../config/entity';
 
@@ -52,7 +53,13 @@ export function updateEntity (entity, propertyName, value) {
  * @param {Element} entity Entity to remove.
  * @param {boolean} force (Optional) If true it won't ask for confirmation.
  */
-export function removeEntity (entity, force) {
+export function removeEntity (entity, force, location) {
+  const ref = firebase.database()
+    .ref(location.state.uId)
+    .child('room')
+    .child(location.state.roomId)
+    .child('element');
+
   if (entity) {
     if (
       force === true ||
@@ -66,6 +73,11 @@ export function removeEntity (entity, force) {
       AFRAME.INSPECTOR.removeObject(entity.object3D);
       entity.parentNode.removeChild(entity);
       AFRAME.INSPECTOR.selectEntity(closest);
+      ref.once('value', (snapshot) => {
+        const transform = closest.outerHTML.split('a-entity').join('Entity');
+        const result = snapshot.val().replace(transform, '');
+        ref.set(result);
+      });
     }
   }
 }
