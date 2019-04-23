@@ -70799,13 +70799,8 @@ var Toolbar = function (_React$Component) {
     _this.writeChanges = function () {
       // eslint-disable-next-line react/prop-types
       var location = _this.props.location;
-      // const ref = firebase.database()
-      //   .ref(location.state.uId)
-      //   .child('room')
-      //   .child(location.state.roomId)
-      //   .child('element');
 
-      var ref = _firebase2.default.database().ref('2YzQLH3NoxfXp376sQhhEbzkeqM2').child('room').child('-Ld879gyWumsJ15OBdvU').child('element');
+      var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
 
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 

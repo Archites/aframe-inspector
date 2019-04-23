@@ -78,15 +78,10 @@ class Toolbar extends React.Component {
   writeChanges = () => {
     // eslint-disable-next-line react/prop-types
     const { location } = this.props;
-    // const ref = firebase.database()
-    //   .ref(location.state.uId)
-    //   .child('room')
-    //   .child(location.state.roomId)
-    //   .child('element');
     const ref = firebase.database()
-      .ref('2YzQLH3NoxfXp376sQhhEbzkeqM2')
+      .ref(location.state.uId)
       .child('room')
-      .child('-Ld879gyWumsJ15OBdvU')
+      .child(location.state.roomId)
       .child('element');
 
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
