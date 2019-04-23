@@ -70875,8 +70875,10 @@ var Toolbar = function (_React$Component) {
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
               Object.keys(historyUpdate[key]).forEach(function (value) {
+                console.log('value => ', value);
                 if (typeof value === 'string') {
                   soup.find('Entity', { id: key }).attrs[value] = historyUpdate[key][value];
+                  console.log('historyUpdate[key][value] => ', historyUpdate[key][value]);
                 } else {
                   var temp = '';
                   Object.keys(historyUpdate[key][value]).forEach(function (data) {

@@ -149,8 +149,10 @@ class Toolbar extends React.Component {
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
             Object.keys(historyUpdate[key]).forEach(value => {
+              console.log('value => ', value);
               if (typeof value === 'string') {
                 soup.find('Entity', {id: key}).attrs[value] = historyUpdate[key][value];
+                console.log('historyUpdate[key][value] => ', historyUpdate[key][value]);
               } else {
                 let temp = '';
                 Object.keys(historyUpdate[key][value]).forEach(data => {
