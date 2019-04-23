@@ -2107,14 +2107,12 @@ function removeEntity(entity, force, location) {
       AFRAME.INSPECTOR.selectEntity(closest);
       ref.once('value', function (snapshot) {
         var transform = closest.outerHTML.split('a-entity').join('Entity');
-        var result = snapshot.val().replace(transform, '');
         Object.keys(closest.attributes).forEach(function (key) {
           var name = closest.attributes[key].nodeName;
           var value = closest.attributes[key].nodeValue;
           transform.replace(name + '=""', name + '=' + value);
         });
-        console.log('transform -> ', transform);
-        console.log('result -> ', result);
+        var result = snapshot.val().replace(transform, '');
         ref.set(result);
       });
     }
