@@ -149,11 +149,12 @@ class Toolbar extends React.Component {
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
             Object.keys(historyUpdate[key]).forEach(value => {
+              console.log(historyUpdate[key][value]);
               soup.find('Entity', {id: key}).attrs[value] = historyUpdate[key][value];
             });
           }
         });
-        console.log(soup.prettify());
+        // console.log(soup.prettify());
         ref.set(soup.prettify());
         alert('Save successful!');
       }

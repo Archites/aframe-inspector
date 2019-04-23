@@ -70875,11 +70875,12 @@ var Toolbar = function (_React$Component) {
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
               Object.keys(historyUpdate[key]).forEach(function (value) {
+                console.log(historyUpdate[key][value]);
                 soup.find('Entity', { id: key }).attrs[value] = historyUpdate[key][value];
               });
             }
           });
-          console.log(soup.prettify());
+          // console.log(soup.prettify());
           ref.set(soup.prettify());
           alert('Save successful!');
         }
