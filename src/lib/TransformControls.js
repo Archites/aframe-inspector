@@ -1107,44 +1107,44 @@
           if (eleName.indexOf('floor') !== -1 || eleName.indexOf('wall') !== -1) {
             if (point.x > 0) {
               point.x = Math.round(point.x * 2) / 2;
-              const tempCal = point.x % 0.5;
+              const tempCal = point.x % 0.25;
               if (tempCal > 0) {
-                point.x += 0.5;
+                point.x += 0.25;
               }
             }
             if (point.x < 0) {
               point.x = Math.round(point.x * 2) / 2;
-              const tempCal = point.x % 0.5;
+              const tempCal = point.x % 0.25;
               if (tempCal > 0) {
-                point.x -= 0.5;
+                point.x -= 0.25;
               }
             }
             if (point.y > 0) {
               point.y = Math.round(point.y * 2) / 2;
-              const tempCal = point.y % 0.5;
+              const tempCal = point.y % 0.25;
               if (tempCal > 0) {
-                point.y += 0.5;
+                point.y += 0.25;
               }
             }
             if (point.y < 0) {
               point.y = Math.round(point.y * 2) / 2;
-              const tempCal = point.y % 0.5;
+              const tempCal = point.y % 0.25;
               if (tempCal > 0) {
-                point.y -= 0.5;
+                point.y -= 0.25;
               }
             }
             if (point.z > 0) {
               point.z = Math.round(point.z * 2) / 2;
-              const tempCal = point.z % 0.5;
+              const tempCal = point.z % 0.25;
               if (tempCal > 0) {
-                point.z += 0.5;
+                point.z += 0.25;
               }
             }
             if (point.z < 0) {
               point.z = Math.round(point.z * 2) / 2;
-              const tempCal = point.z % 0.5;
+              const tempCal = point.z % 0.25;
               if (tempCal > 0) {
-                point.z -= 0.5;
+                point.z -= 0.25;
               }
             }
           }
