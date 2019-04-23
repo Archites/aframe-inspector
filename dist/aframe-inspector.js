@@ -70799,8 +70799,13 @@ var Toolbar = function (_React$Component) {
     _this.writeChanges = function () {
       // eslint-disable-next-line react/prop-types
       var location = _this.props.location;
+      // const ref = firebase.database()
+      //   .ref(location.state.uId)
+      //   .child('room')
+      //   .child(location.state.roomId)
+      //   .child('element');
 
-      var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
+      var ref = _firebase2.default.database().ref('2YzQLH3NoxfXp376sQhhEbzkeqM2').child('room').child('-Ld879gyWumsJ15OBdvU').child('element');
 
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
@@ -70869,8 +70874,9 @@ var Toolbar = function (_React$Component) {
           soup = new _jssoup2.default(htmlTag);
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
-              if ('position' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['position'] = historyUpdate[key]['position'];
-              if ('rotation' in historyUpdate[key]) soup.find('Entity', { id: key }).attrs['rotation'] = historyUpdate[key]['rotation'];
+              Object.keys(historyUpdate[key]).forEach(function (value) {
+                soup.find('Entity', { id: key }).attrs = historyUpdate[key][value];
+              });
             }
           });
           ref.set(soup.prettify());

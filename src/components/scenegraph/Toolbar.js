@@ -78,10 +78,15 @@ class Toolbar extends React.Component {
   writeChanges = () => {
     // eslint-disable-next-line react/prop-types
     const { location } = this.props;
+    // const ref = firebase.database()
+    //   .ref(location.state.uId)
+    //   .child('room')
+    //   .child(location.state.roomId)
+    //   .child('element');
     const ref = firebase.database()
-      .ref(location.state.uId)
+      .ref('2YzQLH3NoxfXp376sQhhEbzkeqM2')
       .child('room')
-      .child(location.state.roomId)
+      .child('-Ld879gyWumsJ15OBdvU')
       .child('element');
 
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
@@ -143,8 +148,9 @@ class Toolbar extends React.Component {
         soup = new JSSoup(htmlTag);
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
-            if ('position' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['position'] = historyUpdate[key]['position'];
-            if ('rotation' in historyUpdate[key]) soup.find('Entity', {id: key}).attrs['rotation'] = historyUpdate[key]['rotation'];
+            Object.keys(historyUpdate[key]).forEach(value => {
+              soup.find('Entity', {id: key}).attrs = historyUpdate[key][value];
+            });
           }
         });
         ref.set(soup.prettify());
