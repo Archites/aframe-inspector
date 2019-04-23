@@ -76,6 +76,8 @@ export function removeEntity (entity, force, location) {
       ref.once('value', (snapshot) => {
         const transform = closest.outerHTML.split('a-entity').join('Entity');
         const result = snapshot.val().replace(transform, '');
+        console.log('transform -> ', transform);
+        console.log('result -> ', result);
         ref.set(result);
       });
     }
