@@ -70801,6 +70801,11 @@ var Toolbar = function (_React$Component) {
       var location = _this.props.location;
 
       var ref = _firebase2.default.database().ref(location.state.uId).child('room').child(location.state.roomId).child('element');
+      // const ref = firebase.database()
+      //   .ref('2YzQLH3NoxfXp376sQhhEbzkeqM2')
+      //   .child('room')
+      //   .child('-Ld879gyWumsJ15OBdvU')
+      //   .child('element');
 
       var historyUpdate = AFRAME.INSPECTOR.history.updates;
 
@@ -70870,10 +70875,11 @@ var Toolbar = function (_React$Component) {
           Object.keys(historyUpdate).forEach(function (key) {
             if (soup.find('Entity', { id: key }) !== undefined) {
               Object.keys(historyUpdate[key]).forEach(function (value) {
-                soup.find('Entity', { id: key }).attrs = historyUpdate[key][value];
+                soup.find('Entity', { id: key }).attrs[value] = historyUpdate[key][value];
               });
             }
           });
+          console.log(soup.prettify());
           ref.set(soup.prettify());
           alert('Save successful!');
         }

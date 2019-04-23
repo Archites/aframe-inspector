@@ -83,6 +83,11 @@ class Toolbar extends React.Component {
       .child('room')
       .child(location.state.roomId)
       .child('element');
+    // const ref = firebase.database()
+    //   .ref('2YzQLH3NoxfXp376sQhhEbzkeqM2')
+    //   .child('room')
+    //   .child('-Ld879gyWumsJ15OBdvU')
+    //   .child('element');
 
     const historyUpdate = AFRAME.INSPECTOR.history.updates;
 
@@ -144,10 +149,11 @@ class Toolbar extends React.Component {
         Object.keys(historyUpdate).forEach(key => {
           if (soup.find('Entity', {id: key}) !== undefined) {
             Object.keys(historyUpdate[key]).forEach(value => {
-              soup.find('Entity', {id: key}).attrs = historyUpdate[key][value];
+              soup.find('Entity', {id: key}).attrs[value] = historyUpdate[key][value];
             });
           }
         });
+        console.log(soup.prettify());
         ref.set(soup.prettify());
         alert('Save successful!');
       }
