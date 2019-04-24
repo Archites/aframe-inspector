@@ -2112,7 +2112,9 @@ function removeEntity(entity, force, location) {
           var value = closest.attributes[key].nodeValue;
           transform.replace(name + '=""', name + '=' + value);
         });
+        console.log('result => ', result);
         var result = snapshot.val().replace(transform, '');
+        console.log('result => ', result);
         ref.set(result);
       });
     }
