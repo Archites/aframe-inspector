@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import JSSoup from 'jssoup';
 var Events = require('../lib/Events.js');
 import entityConfig from '../config/entity';
 
@@ -74,16 +75,21 @@ export function removeEntity (entity, force, location) {
       entity.parentNode.removeChild(entity);
       AFRAME.INSPECTOR.selectEntity(closest);
       ref.once('value', (snapshot) => {
-        let transform = closest.outerHTML.split('a-entity').join('Entity');
-        Object.keys(closest.attributes).forEach(function (key) {
-          var name = closest.attributes[key].nodeName;
-          var value = closest.attributes[key].nodeValue;
-          transform = transform.replace(`${name}=""`, `${name}=${value}`);
-        });
-        console.log('transform => ', transform);
-        const result = snapshot.val().replace(transform, '');
-        console.log('result => ', result);
-        ref.set(result);
+        let soup = new JSSoup(snapshot.val());
+        // let transform = entity
+        console.log(entity.id);
+        soup.find('Entity', {id: entity.id}).remove();
+        // Object.keys(entity.attributes).forEach(function (key) {
+        //   var name = entity.attributes[key].nodeName;
+        //   var value = entity.attributes[key].nodeValue;
+        //   console.log('value => ', value);
+        //   console.log('entity.attributes[key] => ', entity.attributes[key]);
+        //   transform = transform.replace(`${name}=""`, `${name}="${value}"`);
+        // });
+        // console.log('transform => ', transform);
+        // const result = snapshot.val().replace(transform, '');
+        // console.log('result => ', result);
+        ref.set(soup.prettify());
       });
     }
   }
