@@ -74,13 +74,13 @@ export function removeEntity (entity, force, location) {
       entity.parentNode.removeChild(entity);
       AFRAME.INSPECTOR.selectEntity(closest);
       ref.once('value', (snapshot) => {
-        const transform = closest.outerHTML.split('a-entity').join('Entity');
+        let transform = closest.outerHTML.split('a-entity').join('Entity');
         Object.keys(closest.attributes).forEach(function (key) {
           var name = closest.attributes[key].nodeName;
           var value = closest.attributes[key].nodeValue;
-          transform.replace(`${name}=""`, `${name}=${value}`);
+          transform = transform.replace(`${name}=""`, `${name}=${value}`);
         });
-        console.log('result => ', result);
+        console.log('transform => ', transform);
         const result = snapshot.val().replace(transform, '');
         console.log('result => ', result);
         ref.set(result);

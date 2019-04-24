@@ -2110,9 +2110,9 @@ function removeEntity(entity, force, location) {
         Object.keys(closest.attributes).forEach(function (key) {
           var name = closest.attributes[key].nodeName;
           var value = closest.attributes[key].nodeValue;
-          transform.replace(name + '=""', name + '=' + value);
+          transform = transform.replace(name + '=""', name + '=' + value);
         });
-        console.log('result => ', result);
+        console.log('transform => ', transform);
         var result = snapshot.val().replace(transform, '');
         console.log('result => ', result);
         ref.set(result);
