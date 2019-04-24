@@ -78,7 +78,7 @@ export function removeEntity (entity, force, location) {
         let soup = new JSSoup(snapshot.val());
         // let transform = entity
         console.log(entity.id);
-        soup.find('Entity', {id: entity.id}).remove();
+        soup.find('Entity', {id: entity.id}).extract();
         // Object.keys(entity.attributes).forEach(function (key) {
         //   var name = entity.attributes[key].nodeName;
         //   var value = entity.attributes[key].nodeValue;
